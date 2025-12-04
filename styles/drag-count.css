@@ -1,0 +1,256 @@
+/* Drag and Count Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 50%, #F06292 100%);
+    min-height: 100vh;
+}
+
+.game-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    background: #E91E63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #C2185B;
+    transform: translateY(-2px);
+}
+
+.score-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.score-label {
+    font-size: 1.3em;
+    color: #333;
+}
+
+.score-value {
+    font-size: 2em;
+    color: #E91E63;
+    min-width: 60px;
+}
+
+.drag-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.instruction-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.instruction-title {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2.5em;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.target-number {
+    display: inline-block;
+    background: white;
+    color: #E91E63;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 5em;
+    padding: 20px 60px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Drop Zone */
+.drop-zone {
+    background: rgba(255, 255, 255, 0.9);
+    border: 5px dashed #E91E63;
+    border-radius: 25px;
+    min-height: 250px;
+    padding: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.drop-zone.drag-over {
+    background: rgba(233, 30, 99, 0.2);
+    border-color: #C2185B;
+    transform: scale(1.02);
+}
+
+.drop-zone-label {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+    color: #E91E63;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dropped-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    min-height: 120px;
+}
+
+.count-display {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Objects Pool */
+.objects-pool {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.draggable-object {
+    font-size: 4em;
+    cursor: move;
+    transition: transform 0.3s ease;
+    user-select: none;
+    animation: bounceIn 0.5s ease backwards;
+}
+
+.draggable-object:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.draggable-object.dragging {
+    opacity: 0.5;
+    transform: scale(1.3);
+}
+
+.draggable-object.in-zone {
+    cursor: default;
+}
+
+@keyframes bounceIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Buttons */
+.button-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.check-btn,
+.reset-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    color: white;
+    border: none;
+    padding: 15px 50px;
+    font-size: 1.5em;
+    font-family: 'Luckiest Guy', cursive;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #FF9800 0%, #FFC107 100%);
+}
+
+.check-btn:hover,
+.reset-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.check-btn:active,
+.reset-btn:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .instruction-title {
+        font-size: 2em;
+    }
+    
+    .target-number {
+        font-size: 4em;
+        padding: 15px 40px;
+    }
+    
+    .draggable-object {
+        font-size: 3em;
+    }
+    
+    .drop-zone {
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .instruction-title {
+        font-size: 1.5em;
+    }
+    
+    .target-number {
+        font-size: 3em;
+        padding: 10px 30px;
+    }
+    
+    .button-container {
+        flex-direction: column;
+    }
+    
+    .check-btn,
+    .reset-btn {
+        width: 100%;
+    }
+}
