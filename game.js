@@ -70,12 +70,14 @@ class MathGame {
 
     generateAnswerOptions() {
         const options = [this.answer];
+        const MIN_DUMMY_OPTIONS = 2;
+        const RANGE_MULTIPLIER = 2;
         
         // Generate 2 different dummy answers
-        while(options.length < 3) {
+        while(options.length < MIN_DUMMY_OPTIONS + 1) {
             let dummy;
             const range = Math.max(5, this.answer);
-            dummy = Math.floor(Math.random() * (range * 2)) + 1;
+            dummy = Math.floor(Math.random() * (range * RANGE_MULTIPLIER)) + 1;
             
             // Ensure dummy is different from answer and other dummies
             if (!options.includes(dummy) && dummy > 0) {
@@ -149,19 +151,24 @@ class MathGame {
 
 // Initialize game based on page
 function initGame() {
-    const path = window.location.pathname;
-    let operation = 'add'; // default
+    // Try to get operation from body data attribute first
+    const bodyElement = document.body;
+    let operation = bodyElement.getAttribute('data-operation');
     
-    if (path.includes('add.html')) {
-        operation = 'add';
-    } else if (path.includes('sub.html')) {
-        operation = 'subtract';
-    } else if (path.includes('mul.html')) {
-        operation = 'multiply';
-    } else if (path.includes('div.html')) {
-        operation = 'divide';
-    } else if (path.includes('index.html') || path === '/') {
-        operation = 'add';
+    // Fallback to path-based detection if no data attribute
+    if (!operation) {
+        const path = window.location.pathname;
+        if (path.includes('add.html') || path.includes('index.html') || path === '/') {
+            operation = 'add';
+        } else if (path.includes('sub.html')) {
+            operation = 'subtract';
+        } else if (path.includes('mul.html')) {
+            operation = 'multiply';
+        } else if (path.includes('div.html')) {
+            operation = 'divide';
+        } else {
+            operation = 'add'; // default fallback
+        }
     }
     
     new MathGame(operation);
