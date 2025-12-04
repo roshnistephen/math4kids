@@ -1,0 +1,297 @@
+/* Counting Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 50%, #FFEE58 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.game-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.score-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.score-label {
+    font-size: 1.3em;
+    color: #333;
+}
+
+.score-value {
+    font-size: 2em;
+    color: #F44336;
+    min-width: 60px;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.counting-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Character Guide */
+.character-guide {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.guide-character {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.speech-bubble {
+    display: inline-block;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+    position: relative;
+    animation: fadeIn 0.5s ease;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Question Area */
+.question-area {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.question-text {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2.5em;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Objects Container */
+.objects-container {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 40px;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.count-object {
+    font-size: 4em;
+    animation: popIn 0.5s ease backwards;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.count-object:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Answer Buttons */
+.answer-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.number-btn {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 25px;
+    font-size: 2.5em;
+    font-family: 'Luckiest Guy', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.number-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.number-btn:active {
+    transform: scale(0.95);
+}
+
+.number-btn.correct {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    animation: pulse-correct 0.6s ease;
+}
+
+.number-btn.wrong {
+    background: linear-gradient(135deg, #F44336 0%, #E91E63 100%);
+    animation: shake 0.5s ease;
+}
+
+@keyframes pulse-correct {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Progress Container */
+.progress-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.progress-text {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.5);
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .question-text {
+        font-size: 2em;
+    }
+    
+    .count-object {
+        font-size: 3em;
+    }
+    
+    .answer-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .number-btn {
+        padding: 20px;
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .guide-character {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .question-text {
+        font-size: 1.5em;
+    }
+    
+    .count-object {
+        font-size: 2.5em;
+    }
+    
+    .objects-container {
+        padding: 20px;
+        min-height: 200px;
+    }
+}

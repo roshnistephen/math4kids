@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Game - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/game.css">
+</head>
+<body>
+    <audio id="wrongAudio"> 
+        <source src="../media/wrong-buzzer-6268.mp3">
+    </audio>
+    <audio id="correctAudio"> 
+        <source src="../media/correct-156911.mp3">
+    </audio>
+
+    <header class="game-header">
+        <button class="back-btn" onclick="location.href='../math-menu.html'">← Back</button>
+        <div class="score-container">
+            <span class="score-label">Score:</span>
+            <span id="score" class="score-value">0</span>
+            <span class="stars-display" id="stars">⭐⭐⭐</span>
+        </div>
+        <div class="level-badge" id="levelBadge">Easy</div>
+    </header>
+
+    <main class="game-container">
+        <!-- Character Animation Section -->
+        <div class="character-section" id="characterSection">
+            <img src="../images/characters/image_ComfyUI_00001__extracted.png" 
+                 alt="Friendly Character" 
+                 class="game-character" 
+                 id="gameCharacter">
+            <div class="speech-bubble" id="speechBubble">Let's solve this!</div>
+        </div>
+
+        <!-- Equation Display -->
+        <div class="equation-display">
+            <div class="equation-box">
+                <h1 id="num1" class="number num-1">5</h1>
+                <h1 id="operator" class="operator">+</h1>
+                <h1 id="num2" class="number num-2">3</h1>
+                <h1 class="equals">=</h1>
+                <h1 class="question-mark">?</h1>
+            </div>
+        </div>
+
+        <!-- Answer Options -->
+        <div class="answer-section">
+            <h2 class="answer-prompt">Choose the answer:</h2>
+            <div class="answer-options">
+                <button class="answer-btn" id="option1" onclick="checkAnswer(this)">
+                    <span class="option-number">8</span>
+                </button>
+                <button class="answer-btn" id="option2" onclick="checkAnswer(this)">
+                    <span class="option-number">7</span>
+                </button>
+                <button class="answer-btn" id="option3" onclick="checkAnswer(this)">
+                    <span class="option-number">9</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-label">Progress</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text"><span id="questionsAnswered">0</span>/10</div>
+        </div>
+    </main>
+
+    <script src="../scripts/math-game.js"></script>
+</body>
+</html>

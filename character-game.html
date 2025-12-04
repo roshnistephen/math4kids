@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Adventure - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/character-game.css">
+</head>
+<body>
+    <audio id="wrongAudio"> 
+        <source src="media/wrong-buzzer-6268.mp3">
+    </audio>
+    <audio id="correctAudio"> 
+        <source src="media/correct-156911.mp3">
+    </audio>
+
+    <header class="game-header">
+        <button class="back-btn" onclick="location.href='home.html'">🏠 Home</button>
+        <div class="score-container">
+            <span class="score-label">Stars:</span>
+            <span id="starsCollected" class="score-value">0</span>
+            <span class="star-icon">⭐</span>
+        </div>
+        <div class="level-display">Level <span id="currentLevel">1</span></div>
+    </header>
+
+    <main class="adventure-container">
+        <!-- Game Scene -->
+        <div class="game-scene" id="gameScene">
+            <!-- Background -->
+            <div class="scene-background"></div>
+            
+            <!-- Character that moves -->
+            <div class="character-container" id="characterContainer">
+                <img src="images/characters/image_ComfyUI_00001__extracted.png" 
+                     alt="Adventure Character" 
+                     class="adventure-character" 
+                     id="adventureCharacter">
+            </div>
+            
+            <!-- Interactive Elements -->
+            <div class="interactive-elements" id="interactiveElements">
+                <!-- Elements will be dynamically added -->
+            </div>
+            
+            <!-- Stars to collect -->
+            <div class="collectibles" id="collectibles">
+                <!-- Collectibles will be dynamically added -->
+            </div>
+        </div>
+
+        <!-- Challenge Panel -->
+        <div class="challenge-panel" id="challengePanel">
+            <h2 class="challenge-title" id="challengeTitle">Welcome to Animal Adventure!</h2>
+            <div class="challenge-content" id="challengeContent">
+                <p>Help the animals collect stars by solving fun challenges!</p>
+                <p>Use arrow keys or click buttons to move.</p>
+            </div>
+            <div class="challenge-buttons" id="challengeButtons">
+                <button class="start-btn" onclick="startAdventure()">Start Adventure!</button>
+            </div>
+        </div>
+
+        <!-- Movement Controls -->
+        <div class="controls-panel" id="controlsPanel" style="display: none;">
+            <button class="control-btn" onclick="moveCharacter('up')">⬆️</button>
+            <div class="horizontal-controls">
+                <button class="control-btn" onclick="moveCharacter('left')">⬅️</button>
+                <button class="control-btn" onclick="moveCharacter('right')">➡️</button>
+            </div>
+            <button class="control-btn" onclick="moveCharacter('down')">⬇️</button>
+        </div>
+
+        <!-- Progress Info -->
+        <div class="progress-info">
+            <div class="info-item">
+                <span class="info-label">Level:</span>
+                <span id="levelInfo">1 of 5</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Stars Needed:</span>
+                <span id="starsNeeded">5</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="scripts/character-game.js"></script>
+</body>
+</html>

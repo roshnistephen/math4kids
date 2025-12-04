@@ -1,0 +1,326 @@
+/* Home Page Styles - Preschool Friendly Design */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', 'Luckiest Guy', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated Stars Background */
+.stars-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.stars-background::before,
+.stars-background::after {
+    content: '✨';
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s infinite ease-in-out;
+}
+
+.stars-background::before {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.stars-background::after {
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+}
+
+/* Header Styles */
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 10;
+    border-bottom: 5px solid #fed766;
+}
+
+.logo-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.main-title {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 3.5em;
+    color: #fe4a49;
+    text-shadow: 3px 3px 0px #2ab7ca, 6px 6px 0px #fed766;
+    margin-bottom: 10px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #764ba2;
+    font-weight: 600;
+}
+
+/* Main Content */
+.game-selection {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.welcome-message {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.welcome-message h2 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-message p {
+    font-size: 1.3em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Game Grid */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.game-card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.game-card:hover::before {
+    opacity: 1;
+}
+
+.math-card {
+    border-top: 6px solid #fe4a49;
+}
+
+.counting-card {
+    border-top: 6px solid #4CAF50;
+}
+
+.spelling-card {
+    border-top: 6px solid #2ab7ca;
+}
+
+.character-card {
+    border-top: 6px solid #fed766;
+}
+
+.card-icon {
+    font-size: 5em;
+    margin-bottom: 20px;
+    animation: wiggle 2s infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.game-card h3 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.game-card p {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.difficulty-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.badge.easy {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.badge.medium {
+    background: linear-gradient(135deg, #FF9800 0%, #FFC107 100%);
+}
+
+.badge.hard {
+    background: linear-gradient(135deg, #F44336 0%, #E91E63 100%);
+}
+
+.badge.special {
+    background: linear-gradient(135deg, #fed766 0%, #feca57 100%);
+    color: #333;
+}
+
+.play-btn {
+    background: linear-gradient(135deg, #fe4a49 0%, #ff6b6b 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.3em;
+    font-family: 'Luckiest Guy', cursive;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(254, 74, 73, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.play-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.play-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(254, 74, 73, 0.6);
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+/* Footer Info */
+.footer-info {
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 40px;
+}
+
+.footer-info p {
+    margin: 10px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5em;
+    }
+    
+    .welcome-message h2 {
+        font-size: 2em;
+    }
+    
+    .game-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .card-icon {
+        font-size: 4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2em;
+    }
+    
+    .subtitle {
+        font-size: 1.2em;
+    }
+    
+    .game-card {
+        padding: 20px;
+    }
+    
+    .play-btn {
+        padding: 12px 30px;
+        font-size: 1.1em;
+    }
+}
