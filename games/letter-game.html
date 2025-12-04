@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Game - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/letter-game.css">
+</head>
+<body>
+    <audio id="wrongAudio"> 
+        <source src="../media/wrong-buzzer-6268.mp3">
+    </audio>
+    <audio id="correctAudio"> 
+        <source src="../media/correct-156911.mp3">
+    </audio>
+
+    <header class="game-header">
+        <button class="back-btn" onclick="location.href='../spelling-menu.html'">← Back</button>
+        <div class="score-container">
+            <span class="score-label">Score:</span>
+            <span id="score" class="score-value">0</span>
+        </div>
+        <div class="level-badge" id="levelBadge">Uppercase</div>
+    </header>
+
+    <main class="letter-container">
+        <!-- Character Guide -->
+        <div class="character-guide">
+            <img src="../images/characters/image_ComfyUI_00009__extracted.png" 
+                 alt="Guide Character" 
+                 class="guide-character">
+            <div class="speech-bubble" id="speechBubble">Find the letter!</div>
+        </div>
+
+        <!-- Letter Display -->
+        <div class="letter-display">
+            <h2 class="find-letter-text">Find the letter:</h2>
+            <div class="target-letter" id="targetLetter">A</div>
+        </div>
+
+        <!-- Letter Options -->
+        <div class="letter-options" id="letterOptions">
+            <!-- Letters will be dynamically generated -->
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container">
+            <div class="progress-text">Letter <span id="letterNum">1</span> of 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/letter-game.js"></script>
+</body>
+</html>

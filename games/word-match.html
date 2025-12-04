@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Match - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/letter-game.css">
+</head>
+<body>
+    <audio id="correctAudio"> 
+        <source src="../media/correct-156911.mp3">
+    </audio>
+
+    <header class="game-header">
+        <button class="back-btn" onclick="location.href='../spelling-menu.html'">← Back</button>
+        <div class="score-container">
+            <span class="score-label">Score:</span>
+            <span id="score" class="score-value">0</span>
+        </div>
+    </header>
+
+    <main class="letter-container" style="text-align: center; padding: 50px;">
+        <h1 style="font-family: 'Luckiest Guy', cursive; font-size: 3em; color: white; margin-bottom: 30px;">
+            Picture to Word Match
+        </h1>
+        <div style="background: white; padding: 40px; border-radius: 25px; max-width: 600px; margin: 0 auto;">
+            <img src="../images/characters/image_ComfyUI_00006__extracted.png" 
+                 alt="Character" 
+                 style="width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px;">
+            <p style="font-size: 1.5em; color: #333; margin-bottom: 20px;">
+                Match pictures with their words!
+            </p>
+            <p style="font-size: 1.2em; color: #666;">
+                You'll see fun pictures and need to pick the right word!
+            </p>
+            <button onclick="location.href='letter-game.html?level=mixed'" 
+                    style="background: linear-gradient(135deg, #26A69A 0%, #4DB6AC 100%); color: white; border: none; padding: 15px 40px; font-size: 1.5em; font-family: 'Luckiest Guy', cursive; border-radius: 25px; cursor: pointer; margin-top: 30px;">
+                Play Letter Game Instead
+            </button>
+        </div>
+    </main>
+</body>
+</html>

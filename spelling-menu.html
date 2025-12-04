@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Fun - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/menu.css">
+</head>
+<body style="background: linear-gradient(135deg, #2ab7ca 0%, #4FC3F7 50%, #81D4FA 100%);">
+    <header class="menu-header">
+        <button class="back-btn" onclick="location.href='home.html'">🏠 Home</button>
+        <h1>📝 Spelling Fun 📝</h1>
+    </header>
+
+    <main class="menu-container">
+        <div class="level-section">
+            <h2>Choose Your Spelling Game</h2>
+            
+            <!-- Letter Recognition -->
+            <div class="level-card easy-level">
+                <div class="level-header">
+                    <span class="level-icon">🔤</span>
+                    <h3>Letter Match</h3>
+                    <span class="level-desc">Learn your ABCs!</span>
+                </div>
+                <div class="operation-grid">
+                    <div class="operation-btn" onclick="location.href='games/letter-game.html?level=uppercase'">
+                        <span class="op-icon">ABC</span>
+                        <span class="op-name">Uppercase</span>
+                    </div>
+                    <div class="operation-btn" onclick="location.href='games/letter-game.html?level=lowercase'">
+                        <span class="op-icon">abc</span>
+                        <span class="op-name">Lowercase</span>
+                    </div>
+                    <div class="operation-btn" onclick="location.href='games/letter-game.html?level=mixed'">
+                        <span class="op-icon">Aa</span>
+                        <span class="op-name">Mixed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spell the Word -->
+            <div class="level-card medium-level">
+                <div class="level-header">
+                    <span class="level-icon">✏️</span>
+                    <h3>Spell the Word</h3>
+                    <span class="level-desc">Put letters in order</span>
+                </div>
+                <div class="operation-grid">
+                    <div class="operation-btn" onclick="location.href='games/spell-word.html?level=easy'">
+                        <span class="op-icon">🐱</span>
+                        <span class="op-name">3 Letters</span>
+                    </div>
+                    <div class="operation-btn" onclick="location.href='games/spell-word.html?level=medium'">
+                        <span class="op-icon">🐶</span>
+                        <span class="op-name">4-5 Letters</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Word Picture Match -->
+            <div class="level-card hard-level">
+                <div class="level-header">
+                    <span class="level-icon">🎯</span>
+                    <h3>Picture to Word</h3>
+                    <span class="level-desc">Match pictures with words</span>
+                </div>
+                <div class="operation-grid">
+                    <div class="operation-btn" onclick="location.href='games/word-match.html'">
+                        <span class="op-icon">🖼️</span>
+                        <span class="op-name">Start Game</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

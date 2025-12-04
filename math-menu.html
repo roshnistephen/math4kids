@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Adventures - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/menu.css">
+</head>
+<body>
+    <header class="menu-header">
+        <button class="back-btn" onclick="location.href='home.html'">🏠 Home</button>
+        <h1>🔢 Math Adventures 🔢</h1>
+    </header>
+
+    <main class="menu-container">
+        <div class="level-section">
+            <h2>Choose Your Level</h2>
+            
+            <!-- Easy Level -->
+            <div class="level-card easy-level">
+                <div class="level-header">
+                    <span class="level-icon">⭐</span>
+                    <h3>Easy Level</h3>
+                    <span class="level-desc">Numbers 1-10</span>
+                </div>
+                <div class="operation-grid">
+                    <div class="operation-btn" onclick="startGame('add', 'easy')">
+                        <span class="op-icon">➕</span>
+                        <span class="op-name">Addition</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('sub', 'easy')">
+                        <span class="op-icon">➖</span>
+                        <span class="op-name">Subtraction</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('mul', 'easy')">
+                        <span class="op-icon">✖️</span>
+                        <span class="op-name">Multiplication</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('div', 'easy')">
+                        <span class="op-icon">➗</span>
+                        <span class="op-name">Division</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medium Level -->
+            <div class="level-card medium-level">
+                <div class="level-header">
+                    <span class="level-icon">⭐⭐</span>
+                    <h3>Medium Level</h3>
+                    <span class="level-desc">Numbers 10-20</span>
+                </div>
+                <div class="operation-grid">
+                    <div class="operation-btn" onclick="startGame('add', 'medium')">
+                        <span class="op-icon">➕</span>
+                        <span class="op-name">Addition</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('sub', 'medium')">
+                        <span class="op-icon">➖</span>
+                        <span class="op-name">Subtraction</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('mul', 'medium')">
+                        <span class="op-icon">✖️</span>
+                        <span class="op-name">Multiplication</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('div', 'medium')">
+                        <span class="op-icon">➗</span>
+                        <span class="op-name">Division</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hard Level -->
+            <div class="level-card hard-level">
+                <div class="level-header">
+                    <span class="level-icon">⭐⭐⭐</span>
+                    <h3>Hard Level</h3>
+                    <span class="level-desc">Numbers 20-50</span>
+                </div>
+                <div class="operation-grid">
+                    <div class="operation-btn" onclick="startGame('add', 'hard')">
+                        <span class="op-icon">➕</span>
+                        <span class="op-name">Addition</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('sub', 'hard')">
+                        <span class="op-icon">➖</span>
+                        <span class="op-name">Subtraction</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('mul', 'hard')">
+                        <span class="op-icon">✖️</span>
+                        <span class="op-name">Multiplication</span>
+                    </div>
+                    <div class="operation-btn" onclick="startGame('div', 'hard')">
+                        <span class="op-icon">➗</span>
+                        <span class="op-name">Division</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="scripts/menu.js"></script>
+</body>
+</html>

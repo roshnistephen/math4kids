@@ -1,0 +1,346 @@
+/* Enhanced Math Game Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.game-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    background: #764ba2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #667eea;
+    transform: translateY(-2px);
+}
+
+.score-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.score-label {
+    font-size: 1.3em;
+    color: #333;
+}
+
+.score-value {
+    font-size: 2em;
+    color: #fe4a49;
+    min-width: 60px;
+}
+
+.stars-display {
+    font-size: 1.5em;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Character Section */
+.character-section {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.game-character {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.speech-bubble {
+    position: absolute;
+    top: 20px;
+    right: 20%;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.speech-bubble.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid white;
+}
+
+/* Equation Display */
+.equation-display {
+    background: white;
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.equation-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.equation-box h1 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.num-1 {
+    color: #fe4a49;
+}
+
+.operator {
+    color: #2ab7ca;
+}
+
+.num-2 {
+    color: #fed766;
+}
+
+.equals {
+    color: #fe4a49;
+}
+
+.question-mark {
+    color: #999;
+}
+
+/* Answer Section */
+.answer-section {
+    margin-bottom: 30px;
+}
+
+.answer-prompt {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.answer-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 30px;
+    font-size: 3em;
+    font-family: 'Luckiest Guy', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.answer-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.answer-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.answer-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.answer-btn:active {
+    transform: scale(0.95);
+}
+
+.answer-btn.correct {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    animation: pulse-correct 0.6s ease;
+}
+
+.answer-btn.wrong {
+    background: linear-gradient(135deg, #F44336 0%, #E91E63 100%);
+    animation: shake 0.5s ease;
+}
+
+@keyframes pulse-correct {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-15px); }
+    75% { transform: translateX(15px); }
+}
+
+/* Progress Bar */
+.progress-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.progress-label {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.5);
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress-text {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.3em;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .equation-box h1 {
+        font-size: 3.5em;
+    }
+    
+    .answer-options {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .answer-btn {
+        padding: 25px;
+        font-size: 2.5em;
+    }
+    
+    .game-character {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .speech-bubble {
+        font-size: 1.1em;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .score-value {
+        font-size: 1.5em;
+    }
+    
+    .equation-box h1 {
+        font-size: 2.5em;
+        gap: 10px;
+    }
+    
+    .answer-btn {
+        padding: 20px;
+        font-size: 2em;
+    }
+}

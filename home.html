@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math 4 Kids - Learning Made Fun!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+    <div class="stars-background"></div>
+    
+    <header class="main-header">
+        <div class="logo-container">
+            <h1 class="main-title">🎮 Math 4 Kids 🎮</h1>
+            <p class="subtitle">Learn & Play Together!</p>
+        </div>
+    </header>
+
+    <main class="game-selection">
+        <div class="welcome-message">
+            <h2>Choose Your Adventure!</h2>
+            <p>Pick a game and start learning with fun!</p>
+        </div>
+
+        <div class="game-grid">
+            <!-- Math Games Card -->
+            <div class="game-card math-card" data-game="math">
+                <div class="card-icon">🔢</div>
+                <h3>Math Adventures</h3>
+                <p>Practice addition, subtraction, multiplication, and division!</p>
+                <div class="difficulty-badges">
+                    <span class="badge easy">⭐ Easy</span>
+                    <span class="badge medium">⭐⭐ Medium</span>
+                    <span class="badge hard">⭐⭐⭐ Hard</span>
+                </div>
+                <button class="play-btn" onclick="location.href='math-menu.html'">Let's Play!</button>
+            </div>
+
+            <!-- Counting Games Card -->
+            <div class="game-card counting-card" data-game="counting">
+                <div class="card-icon">🍎</div>
+                <h3>Counting Fun</h3>
+                <p>Count objects, learn numbers, and solve puzzles!</p>
+                <div class="difficulty-badges">
+                    <span class="badge easy">1-10</span>
+                    <span class="badge medium">10-20</span>
+                </div>
+                <button class="play-btn" onclick="location.href='counting-menu.html'">Let's Count!</button>
+            </div>
+
+            <!-- Spelling Games Card -->
+            <div class="game-card spelling-card" data-game="spelling">
+                <div class="card-icon">📝</div>
+                <h3>Spelling Fun</h3>
+                <p>Learn letters, spell words, and have fun!</p>
+                <div class="difficulty-badges">
+                    <span class="badge easy">ABC</span>
+                    <span class="badge medium">Words</span>
+                </div>
+                <button class="play-btn" onclick="location.href='spelling-menu.html'">Let's Spell!</button>
+            </div>
+
+            <!-- Character Adventure Card -->
+            <div class="game-card character-card" data-game="character">
+                <div class="card-icon">🦁</div>
+                <h3>Animal Adventure</h3>
+                <p>Join cute animals in a learning adventure!</p>
+                <div class="difficulty-badges">
+                    <span class="badge special">🌟 Special</span>
+                </div>
+                <button class="play-btn" onclick="location.href='character-game.html'">Start Adventure!</button>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>👶 Designed for preschool kids (Ages 4-5) 👧</p>
+            <p>🎓 Learn while you play! 🎉</p>
+        </div>
+    </main>
+
+    <script src="scripts/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+/* Menu Page Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #fe4a49 0%, #ff6b6b 50%, #fed766 100%);
+    min-height: 100vh;
+}
+
+.menu-header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn {
+    background: #764ba2;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn:hover {
+    background: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.menu-header h1 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2.5em;
+    color: #fe4a49;
+    text-shadow: 2px 2px 0px #2ab7ca;
+}
+
+.menu-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.level-section h2 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.level-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.level-card:hover {
+    transform: translateY(-5px);
+}
+
+.easy-level {
+    border-top: 6px solid #4CAF50;
+}
+
+.medium-level {
+    border-top: 6px solid #FF9800;
+}
+
+.hard-level {
+    border-top: 6px solid #F44336;
+}
+
+.level-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 3px dashed #eee;
+}
+
+.level-icon {
+    font-size: 2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.level-header h3 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.level-desc {
+    color: #666;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.operation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.operation-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.operation-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.operation-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.operation-btn:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.operation-btn:active {
+    transform: scale(0.95);
+}
+
+.op-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.op-name {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.5em;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .level-header h3 {
+        font-size: 1.5em;
+    }
+    
+    .operation-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .operation-btn {
+        padding: 20px;
+    }
+    
+    .op-icon {
+        font-size: 2.5em;
+    }
+    
+    .op-name {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .menu-header h1 {
+        font-size: 1.5em;
+    }
+    
+    .operation-grid {
+        grid-template-columns: 1fr;
+    }
+}

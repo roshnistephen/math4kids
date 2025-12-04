@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count the Objects - Math 4 Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/counting-game.css">
+</head>
+<body>
+    <audio id="wrongAudio"> 
+        <source src="../media/wrong-buzzer-6268.mp3">
+    </audio>
+    <audio id="correctAudio"> 
+        <source src="../media/correct-156911.mp3">
+    </audio>
+
+    <header class="game-header">
+        <button class="back-btn" onclick="location.href='../counting-menu.html'">← Back</button>
+        <div class="score-container">
+            <span class="score-label">Score:</span>
+            <span id="score" class="score-value">0</span>
+        </div>
+        <div class="level-badge" id="levelBadge">Easy</div>
+    </header>
+
+    <main class="counting-container">
+        <!-- Character Guide -->
+        <div class="character-guide">
+            <img src="../images/characters/image_ComfyUI_00004__extracted.png" 
+                 alt="Guide Character" 
+                 class="guide-character" 
+                 id="guideCharacter">
+            <div class="speech-bubble" id="speechBubble">Count the objects!</div>
+        </div>
+
+        <!-- Question Area -->
+        <div class="question-area">
+            <h2 class="question-text" id="questionText">How many apples do you see?</h2>
+        </div>
+
+        <!-- Objects Display Area -->
+        <div class="objects-container" id="objectsContainer">
+            <!-- Objects will be dynamically generated -->
+        </div>
+
+        <!-- Answer Buttons -->
+        <div class="answer-buttons">
+            <button class="number-btn" id="btn1" onclick="checkCountingAnswer(1)">1</button>
+            <button class="number-btn" id="btn2" onclick="checkCountingAnswer(2)">2</button>
+            <button class="number-btn" id="btn3" onclick="checkCountingAnswer(3)">3</button>
+            <button class="number-btn" id="btn4" onclick="checkCountingAnswer(4)">4</button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container">
+            <div class="progress-text">Question <span id="questionNum">1</span> of 10</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/counting-game.js"></script>
+</body>
+</html>
