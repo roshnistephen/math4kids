@@ -70,29 +70,36 @@ body{
     margin-top: 10px;
     text-align: center;
     width: 100%;
-
+    transition: all 0.3s ease;
+    user-select: none;
+}
+.answerOptions h1:active{
+    transform: scale(0.95);
 }
 #option1 {
     background-color: #fe4a49;
-    transition: 1s;
+    transition: all 0.3s ease;
 }
 #option1:hover{
     color: #fe4a49;
     background-color: white;
+    transform: scale(1.05);
 }
 #option2 {
     background-color: #2ab7ca;
-    transition: 1s;
+    transition: all 0.3s ease;
 }
 #option2:hover{
-    color: #fe4a49;
+    color: #2ab7ca;
     background-color: white;
+    transform: scale(1.05);
 }
 #option3 {
     background-color: #fed766;
-    transition: 1s;
+    transition: all 0.3s ease;
 }
 #option3:hover{
     color: #fed766;
     background-color: white;
+    transform: scale(1.05);
 }
