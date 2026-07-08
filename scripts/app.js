@@ -1,5 +1,9 @@
 (() => {
     const STORAGE_KEY = 'math4kids-adventure-state';
+    const FIRST_WIN_BASE_STARS = 2;
+    const PERFECT_BONUS_STARS = 1;
+    const REPEAT_WIN_STARS = 1;
+
     const defaultState = {
         stars: 0,
         badges: [],
@@ -43,7 +47,9 @@
         const previous = state.completed[key];
         const firstWin = !previous;
         const perfect = score === maxScore;
-        const starsEarned = firstWin ? Math.max(2, score) + (perfect ? 1 : 0) : 1;
+        const starsEarned = firstWin
+            ? Math.max(FIRST_WIN_BASE_STARS, score) + (perfect ? PERFECT_BONUS_STARS : 0)
+            : REPEAT_WIN_STARS;
 
         state.stars += starsEarned;
         state.completed[key] = {

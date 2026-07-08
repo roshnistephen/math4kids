@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
         awaitingNext: false,
         openCards: [],
         matchedPairs: 0,
-        collectorSelection: []
+        collectorSelection: [],
+        memoryTimeout: null
     };
 
     const elements = {
@@ -92,6 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
         state.openCards = [];
         state.matchedPairs = 0;
         state.collectorSelection = [];
+        if (state.memoryTimeout) {
+            clearTimeout(state.memoryTimeout);
+            state.memoryTimeout = null;
+        }
         renderActivityRail(activity.id);
         renderActivity();
     }
@@ -302,9 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.feedbackBanner.className = 'feedback-banner';
         elements.feedbackBanner.textContent = 'Flip two cards to begin.';
 
-        const deck = [...state.activity.pairs, ...state.activity.pairs]
-            .map((symbol, index) => ({ id: `${symbol}-${index}`, symbol, open: false, matched: false }))
-            .sort(() => Math.random() - 0.5);
+        const deck = shuffle([...state.activity.pairs, ...state.activity.pairs]
+            .map((symbol, index) => ({ id: `${symbol}-${index}`, symbol, open: false, matched: false })));
 
         state.memoryDeck = deck;
         drawMemoryDeck();
@@ -327,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function flipMemoryCard(cardId) {
-        if (state.openCards.length === 2) return;
+        if (state.openCards.length === 2 || state.memoryTimeout) return;
         const card = state.memoryDeck.find((item) => item.id === cardId);
         if (!card || card.open || card.matched) return;
 
@@ -355,14 +359,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 elements.feedbackBanner.className = 'feedback-banner is-warning';
                 elements.feedbackBanner.textContent = 'Not a match yet. Try again!';
                 AdventureApp.playSound('wrong');
-                window.setTimeout(() => {
+                state.memoryTimeout = setTimeout(() => {
                     first.open = false;
                     second.open = false;
                     state.openCards = [];
+                    state.memoryTimeout = null;
                     drawMemoryDeck();
                 }, 700);
             }
         }
+    }
+
+    function shuffle(items) {
+        const output = [...items];
+        for (let index = output.length - 1; index > 0; index -= 1) {
+            const swapIndex = Math.floor(Math.random() * (index + 1));
+            [output[index], output[swapIndex]] = [output[swapIndex], output[index]];
+        }
+        return output;
     }
 
     function goToNextQuestion() {
