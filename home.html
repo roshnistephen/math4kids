@@ -3,84 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math 4 Kids - Learning Made Fun!</title>
+    <title>Math4Kids Adventure World</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/adventure.css">
 </head>
-<body>
-    <div class="stars-background"></div>
-    
-    <header class="main-header">
-        <div class="logo-container">
-            <h1 class="main-title">🎮 Math 4 Kids 🎮</h1>
-            <p class="subtitle">Learn & Play Together!</p>
+<body class="home-screen" data-theme="home">
+    <div class="page-decor page-decor--home"></div>
+
+    <header class="app-header home-header">
+        <a class="tiny-pill" href="home.html">✨ Preschool Adventure</a>
+        <div class="reward-bar" aria-label="Reward summary">
+            <div class="reward-chip">⭐ <span data-stars>0</span> stars</div>
+            <div class="reward-chip">🏅 <span data-badges>0</span> badges</div>
+            <div class="reward-chip">🎉 <span data-completed>0</span> wins</div>
         </div>
     </header>
 
-    <main class="game-selection">
-        <div class="welcome-message">
-            <h2>Choose Your Adventure!</h2>
-            <p>Pick a game and start learning with fun!</p>
-        </div>
-
-        <div class="game-grid">
-            <!-- Math Games Card -->
-            <div class="game-card math-card" data-game="math">
-                <div class="card-icon">🔢</div>
-                <h3>Math Adventures</h3>
-                <p>Practice addition, subtraction, multiplication, and division!</p>
-                <div class="difficulty-badges">
-                    <span class="badge easy">⭐ Easy</span>
-                    <span class="badge medium">⭐⭐ Medium</span>
-                    <span class="badge hard">⭐⭐⭐ Hard</span>
+    <main class="home-layout">
+        <section class="hero-panel">
+            <div class="hero-copy">
+                <p class="eyebrow">A playful learning world for ages 3–5</p>
+                <h1>Learn through wonder, tapping, matching, and happy surprises.</h1>
+                <p class="hero-text">Explore animal friends, number games, alphabet play, shapes, colors, memory puzzles, and cheerful rewards in one magical mobile-style adventure.</p>
+                <div class="hero-actions">
+                    <a class="primary-button" href="world.html?world=animal">Start Animal World</a>
+                    <a class="secondary-button" href="world.html?world=number">Jump into Number Fun</a>
                 </div>
-                <button class="play-btn" onclick="location.href='math-menu.html'">Let's Play!</button>
+            </div>
+            <div class="hero-scene" aria-hidden="true">
+                <div class="scene-cloud scene-cloud--one"></div>
+                <div class="scene-cloud scene-cloud--two"></div>
+                <div class="scene-character">🦁</div>
+                <div class="scene-character scene-character--two">🐰</div>
+                <div class="scene-badge">⭐ Tap to learn</div>
+            </div>
+        </section>
+
+        <section class="section-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Choose a world</p>
+                    <h2>Big worlds. Tiny steps. Lots of smiles.</h2>
+                </div>
+                <p class="section-note">Each world has mini games, easy navigation, and celebration moments after every success.</p>
             </div>
 
-            <!-- Counting Games Card -->
-            <div class="game-card counting-card" data-game="counting">
-                <div class="card-icon">🍎</div>
-                <h3>Counting Fun</h3>
-                <p>Count objects, learn numbers, and solve puzzles!</p>
-                <div class="difficulty-badges">
-                    <span class="badge easy">1-10</span>
-                    <span class="badge medium">10-20</span>
-                </div>
-                <button class="play-btn" onclick="location.href='counting-menu.html'">Let's Count!</button>
+            <div class="world-grid">
+                <a class="world-card theme-animal" href="world.html?world=animal">
+                    <span class="world-icon">🦁</span>
+                    <h3>Animal World Adventure</h3>
+                    <p>Identify animals, match sounds, and meet baby animal families.</p>
+                    <span class="world-tag">Learn + play</span>
+                </a>
+                <a class="world-card theme-number" href="world.html?world=number">
+                    <span class="world-icon">🎈</span>
+                    <h3>Number Fun World</h3>
+                    <p>Count objects, pop number balloons, and solve missing-number puzzles.</p>
+                    <span class="world-tag">Count + discover</span>
+                </a>
+                <a class="world-card theme-alphabet" href="world.html?world=alphabet">
+                    <span class="world-icon">🔤</span>
+                    <h3>Alphabet Adventure</h3>
+                    <p>Recognize letters, hear beginning sounds, and match letters with objects.</p>
+                    <span class="world-tag">ABC + phonics</span>
+                </a>
+                <a class="world-card theme-shape" href="world.html?world=shape">
+                    <span class="world-icon">🌈</span>
+                    <h3>Shape &amp; Color Explorer</h3>
+                    <p>Sort colors, spot shapes, and choose the right visual clues.</p>
+                    <span class="world-tag">See + sort</span>
+                </a>
+                <a class="world-card theme-memory" href="world.html?world=memory">
+                    <span class="world-icon">🧠</span>
+                    <h3>Memory &amp; Brain Games</h3>
+                    <p>Find pairs, spot patterns, and build observation skills with fun puzzles.</p>
+                    <span class="world-tag">Think + remember</span>
+                </a>
             </div>
+        </section>
 
-            <!-- Spelling Games Card -->
-            <div class="game-card spelling-card" data-game="spelling">
-                <div class="card-icon">📝</div>
-                <h3>Spelling Fun</h3>
-                <p>Learn letters, spell words, and have fun!</p>
-                <div class="difficulty-badges">
-                    <span class="badge easy">ABC</span>
-                    <span class="badge medium">Words</span>
-                </div>
-                <button class="play-btn" onclick="location.href='spelling-menu.html'">Let's Spell!</button>
-            </div>
-
-            <!-- Character Adventure Card -->
-            <div class="game-card character-card" data-game="character">
-                <div class="card-icon">🦁</div>
-                <h3>Animal Adventure</h3>
-                <p>Join cute animals in a learning adventure!</p>
-                <div class="difficulty-badges">
-                    <span class="badge special">🌟 Special</span>
-                </div>
-                <button class="play-btn" onclick="location.href='character-game.html'">Start Adventure!</button>
-            </div>
-        </div>
-
-        <div class="footer-info">
-            <p>👶 Designed for preschool kids (Ages 4-5) 👧</p>
-            <p>🎓 Learn while you play! 🎉</p>
-        </div>
+        <section class="feature-strip">
+            <article class="feature-card">
+                <span>🎁</span>
+                <h3>Shared rewards</h3>
+                <p>Collect stars and badges across every activity.</p>
+            </article>
+            <article class="feature-card">
+                <span>👆</span>
+                <h3>Big friendly taps</h3>
+                <p>Large buttons and simple choices made for small hands.</p>
+            </article>
+            <article class="feature-card">
+                <span>🎊</span>
+                <h3>Happy feedback</h3>
+                <p>Confetti, sounds, and cheerful messages after correct answers.</p>
+            </article>
+        </section>
     </main>
 
+    <script src="scripts/app.js"></script>
     <script src="scripts/home.js"></script>
 </body>
 </html>
