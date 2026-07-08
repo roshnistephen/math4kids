@@ -663,15 +663,15 @@ window.WORLD_DATA = {
                 type: 'choice',
                 questions: [
                     {
-                        art: '👀',
-                        prompt: 'Which picture matches the first balloon?',
+                        art: '☀️',
+                        prompt: 'Which picture matches the sun clue?',
                         options: [
-                            { value: 'yellow-balloon', icon: '🎈', label: 'Yellow balloon' },
-                            { value: 'yellow-balloon-2', icon: '🎈', label: 'Yellow balloon' },
-                            { value: 'kite', icon: '🪁', label: 'Kite' }
+                            { value: 'sun', icon: '☀️', label: 'Sun' },
+                            { value: 'moon', icon: '🌙', label: 'Moon' },
+                            { value: 'cloud', icon: '☁️', label: 'Cloud' }
                         ],
-                        answer: 'yellow-balloon-2',
-                        success: 'Great watching! The balloons matched.'
+                        answer: 'sun',
+                        success: 'Great watching! The sun matched the clue.'
                     },
                     {
                         art: '🍉  🍉  🍋',
