@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure World - Math4Kids</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/adventure.css">
+</head>
+<body class="world-screen" data-theme="animal">
+    <audio id="wrongAudio">
+        <source src="media/wrong-buzzer-6268.mp3">
+    </audio>
+    <audio id="correctAudio">
+        <source src="media/correct-156911.mp3">
+    </audio>
+
+    <div class="page-decor"></div>
+
+    <header class="app-header world-header">
+        <a class="secondary-button secondary-button--small" href="home.html">🏠 Home</a>
+        <div class="header-copy">
+            <p class="eyebrow" id="worldEyebrow">Adventure world</p>
+            <h1 id="worldTitle">Loading world…</h1>
+        </div>
+        <div class="reward-bar" aria-label="Reward summary">
+            <div class="reward-chip">⭐ <span data-stars>0</span></div>
+            <div class="reward-chip">🏅 <span data-badges>0</span></div>
+            <div class="reward-chip">🎉 <span data-completed>0</span></div>
+        </div>
+    </header>
+
+    <main class="world-layout">
+        <section class="mascot-banner">
+            <div class="mascot-avatar" id="mascotAvatar" aria-hidden="true">🦁</div>
+            <div class="mascot-copy">
+                <p class="eyebrow" id="worldSubtitle">Let’s play!</p>
+                <h2 id="activityHeadline">Choose a mini game.</h2>
+                <p id="mascotMessage">Tap a game button to begin your adventure.</p>
+            </div>
+        </section>
+
+        <nav class="activity-rail" id="activityRail" aria-label="Activities"></nav>
+
+        <section class="stage-panel">
+            <div class="stage-topline">
+                <div>
+                    <p class="eyebrow" id="activityKicker">Mini game</p>
+                    <h3 id="activityTitle">Loading…</h3>
+                </div>
+                <div class="progress-pill">Round <span id="progressCount">1</span></div>
+            </div>
+
+            <div class="prompt-panel">
+                <p class="prompt-helper" id="promptHelper">Tap the best answer.</p>
+                <div class="prompt-art" id="promptArt" aria-hidden="true"></div>
+                <h4 class="prompt-title" id="promptText">Get ready!</h4>
+            </div>
+
+            <div class="options-grid" id="optionsGrid"></div>
+            <div class="collector-board" id="collectorBoard" hidden></div>
+            <div class="memory-board" id="memoryBoard" hidden></div>
+
+            <div class="feedback-banner" id="feedbackBanner">Pick a card to start.</div>
+
+            <div class="stage-actions">
+                <button class="primary-button" id="primaryAction" type="button">Next</button>
+                <button class="secondary-button" id="secondaryAction" type="button">Play again</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/activity-data.js"></script>
+    <script src="scripts/world.js"></script>
+</body>
+</html>
