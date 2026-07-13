@@ -156,6 +156,10 @@ class SnakeGame {
             this.popAnimation = { age: 0, duration: 220, x: nextHead.x, y: nextHead.y };
             this.playEatSound();
             this.updateScore();
+
+            if (!this.food) {
+                this.endGame();
+            }
         } else {
             this.snake.pop();
         }
@@ -228,6 +232,10 @@ class SnakeGame {
             }
         }
 
+        if (openCells.length === 0) {
+            return null;
+        }
+
         return openCells[Math.floor(Math.random() * openCells.length)];
     }
 
@@ -236,15 +244,27 @@ class SnakeGame {
 
         if (this.score > this.bestScore) {
             this.bestScore = this.score;
-            localStorage.setItem(GAME_SETTINGS.bestScoreKey, String(this.bestScore));
+            this.writeBestScore();
         }
 
         this.bestScoreElement.textContent = String(this.bestScore);
     }
 
     readBestScore() {
-        const savedScore = Number.parseInt(localStorage.getItem(GAME_SETTINGS.bestScoreKey) || '0', 10);
-        return Number.isFinite(savedScore) ? savedScore : 0;
+        try {
+            const savedScore = Number.parseInt(localStorage.getItem(GAME_SETTINGS.bestScoreKey) || '0', 10);
+            return Number.isFinite(savedScore) ? savedScore : 0;
+        } catch (error) {
+            return 0;
+        }
+    }
+
+    writeBestScore() {
+        try {
+            localStorage.setItem(GAME_SETTINGS.bestScoreKey, String(this.bestScore));
+        } catch (error) {
+            // Ignore storage write failures so the game still works in restricted modes.
+        }
     }
 
     endGame() {
@@ -335,6 +355,10 @@ class SnakeGame {
     }
 
     drawFood() {
+        if (!this.food) {
+            return;
+        }
+
         const centerX = this.food.x * this.cellSize + this.cellSize / 2;
         const centerY = this.food.y * this.cellSize + this.cellSize / 2;
         const pulseScale = 1 + Math.sin(this.foodPulse) * 0.08;
