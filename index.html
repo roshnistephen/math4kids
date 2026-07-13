@@ -3,13 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game - Fun for Kids</title>
-    <meta http-equiv="refresh" content="0; url=snake.html">
+    <title>Nokia Snake for Kids</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Redirecting to Snake Game...</p>
-    <script>
-        window.location.href = 'snake.html';
-    </script>
+    <main class="app">
+        <section class="game-shell" aria-label="Snake game">
+            <header class="top-bar">
+                <div>
+                    <p class="eyebrow">Classic Nokia Snake</p>
+                    <h1>Snake Time!</h1>
+                </div>
+                <div class="score-panel" aria-live="polite">
+                    <div class="score-card">
+                        <span class="score-label">Score</span>
+                        <strong id="scoreValue">0</strong>
+                    </div>
+                    <div class="score-card">
+                        <span class="score-label">Best</span>
+                        <strong id="bestScoreValue">0</strong>
+                    </div>
+                </div>
+            </header>
+
+            <section class="board-section">
+                <div class="canvas-frame">
+                    <canvas id="gameCanvas" width="480" height="480" aria-label="Snake game board"></canvas>
+                    <div id="gameOverOverlay" class="dialog-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="gameOverTitle">
+                        <div class="dialog-card">
+                            <h2 id="gameOverTitle">Game Over</h2>
+                            <p>Final Score: <strong id="finalScoreValue">0</strong></p>
+                            <p>Best Score: <strong id="dialogBestScoreValue">0</strong></p>
+                            <button id="playAgainButton" class="primary-button" type="button">Play Again</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="helper-panel">
+                    <p class="instructions">Use the arrow keys or tap the buttons to guide the snake.</p>
+
+                    <div class="controls" aria-label="On-screen controls">
+                        <button class="control-button up" type="button" data-direction="up" aria-label="Move up">▲</button>
+                        <div class="control-row">
+                            <button class="control-button" type="button" data-direction="left" aria-label="Move left">◀</button>
+                            <button class="control-button" type="button" data-direction="down" aria-label="Move down">▼</button>
+                            <button class="control-button" type="button" data-direction="right" aria-label="Move right">▶</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="game.js"></script>
 </body>
 </html>
