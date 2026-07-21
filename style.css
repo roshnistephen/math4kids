@@ -361,9 +361,9 @@ kbd {
     color: var(--text-secondary);
 }
 
-.final-stars {
-    font-size: 1.4rem !important;
-    margin-bottom: 4px !important;
+.dialog-card .final-stars {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
     letter-spacing: 3px;
 }
 
@@ -391,7 +391,7 @@ kbd {
 }
 
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 /* ── Responsive ───────────────────────────── */

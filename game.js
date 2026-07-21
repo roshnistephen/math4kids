@@ -11,6 +11,8 @@ const PARTS = [
     { id: 'nails',  label: 'Nail Polish 💅',    emoji: '💅' },
 ];
 
+const COLORS_PER_PART = 6;
+
 const PALETTES = {
     horn:   ['#FFD700', '#FF69B4', '#B39DDB', '#4DD0E1', '#FF7043', '#E0E0E0'],
     mane:   ['#F06292', '#AB47BC', '#26C6DA', '#FFCA28', '#EF5350', '#66BB6A'],
@@ -138,12 +140,12 @@ class UnicornMakeupGame {
                 break;
             case 'ArrowLeft':
                 e.preventDefault();
-                this.colorIdx = (this.colorIdx - 1 + 6) % 6;
+                this.colorIdx = (this.colorIdx - 1 + COLORS_PER_PART) % COLORS_PER_PART;
                 this.refreshUI();
                 break;
             case 'ArrowRight':
                 e.preventDefault();
-                this.colorIdx = (this.colorIdx + 1) % 6;
+                this.colorIdx = (this.colorIdx + 1) % COLORS_PER_PART;
                 this.refreshUI();
                 break;
             case 'Enter':
