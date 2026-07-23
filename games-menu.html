@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math4Kids – Choose a Game 🎮</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-top:   #A78BFA;
+            --bg-mid:   #C4B5FD;
+            --bg-bot:   #EDE9FE;
+            --white:    rgba(255, 255, 255, 0.94);
+            --text-dk:  #1e1450;
+            --text-md:  #5b4fa8;
+            --shadow:   0 16px 48px rgba(91, 79, 168, 0.18);
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bot) 100%);
+            color: var(--text-dk);
+            overflow-x: hidden;
+        }
+
+        /* ── Stars & sparkles ─────────────────── */
+        .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,.75);
+            animation: twinkle var(--d) ease-in-out infinite var(--delay) alternate;
+        }
+
+        @keyframes twinkle {
+            from { opacity: .2; transform: scale(.8); }
+            to   { opacity: 1;  transform: scale(1.3); }
+        }
+
+        /* ── Page wrapper ─────────────────────── */
+        .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 20px 64px; }
+
+        /* ── Header ───────────────────────────── */
+        .site-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 22px 0 10px;
+            flex-wrap: wrap; gap: 12px;
+        }
+
+        .site-logo {
+            font-size: 1.6rem; font-weight: 700; color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,.18);
+        }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            text-decoration: none;
+            background: rgba(255,255,255,.25);
+            color: #fff;
+            border: 2px solid rgba(255,255,255,.5);
+            font-family: 'Fredoka', sans-serif;
+            font-size: .95rem; font-weight: 600;
+            border-radius: 24px; padding: 8px 18px;
+            backdrop-filter: blur(8px);
+            transition: background .2s, transform .2s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,.4); transform: translateY(-2px); }
+
+        /* ── Hero ─────────────────────────────── */
+        .hero {
+            text-align: center;
+            padding: 36px 16px 28px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,.25);
+            border: 2px solid rgba(255,255,255,.5);
+            border-radius: 30px;
+            padding: 6px 20px;
+            font-size: .95rem; font-weight: 600; color: #fff;
+            margin-bottom: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 8vw, 3.6rem);
+            font-weight: 700; color: #fff;
+            text-shadow: 0 3px 12px rgba(0,0,0,.18);
+            line-height: 1.15; margin-bottom: 12px;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem; color: rgba(255,255,255,.88);
+            max-width: 500px; margin: 0 auto;
+        }
+
+        /* ── Game grid ────────────────────────── */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        /* ── Game card ────────────────────────── */
+        .game-card {
+            display: flex; flex-direction: column;
+            background: var(--white);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-decoration: none; color: inherit;
+            transition: transform .25s, box-shadow .25s;
+            position: relative;
+        }
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 64px rgba(91,79,168,.28);
+        }
+        .game-card:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+        .card-banner {
+            height: 180px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card 1 – Unicorn Makeup */
+        .card-unicorn .card-banner {
+            background: linear-gradient(135deg, #FF85A2 0%, #FFCDE4 50%, #D8A0F7 100%);
+        }
+
+        /* Card 2 – Balloon Math */
+        .card-balloon .card-banner {
+            background: linear-gradient(135deg, #74B9FF 0%, #A29BFE 50%, #FFD93D 100%);
+        }
+
+        .card-number {
+            position: absolute; top: 14px; left: 14px;
+            background: rgba(255,255,255,.6);
+            backdrop-filter: blur(6px);
+            border-radius: 20px; padding: 4px 12px;
+            font-size: .85rem; font-weight: 700; color: var(--text-dk);
+        }
+
+        .card-icon {
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,.15));
+            animation: iconFloat 3.5s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%,100%{ transform: translateY(0)     rotate(-3deg); }
+            50%    { transform: translateY(-12px)  rotate( 3deg); }
+        }
+
+        .card-body {
+            padding: 24px 26px 28px;
+            flex: 1; display: flex; flex-direction: column;
+        }
+
+        .card-tag {
+            display: inline-block;
+            border-radius: 16px; padding: 3px 14px;
+            font-size: .82rem; font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .card-unicorn .card-tag { background: #FFE4F0; color: #C2185B; }
+        .card-balloon .card-tag { background: #E3F2FF; color: #1565C0; }
+
+        .card-title {
+            font-size: 1.55rem; font-weight: 700;
+            color: var(--text-dk); margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .card-desc {
+            font-size: 1rem; color: var(--text-md);
+            line-height: 1.5; flex: 1;
+        }
+
+        .card-cta {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 20px;
+            border-radius: 24px; padding: 11px 26px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem; font-weight: 700; color: #fff;
+            border: none; cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            text-decoration: none;
+            align-self: flex-start;
+        }
+        .card-cta:hover { transform: translateY(-2px); }
+
+        .card-unicorn .card-cta {
+            background: linear-gradient(135deg, #FF85A2, #C2185B);
+            box-shadow: 0 5px 18px rgba(194,24,91,.35);
+        }
+        .card-balloon .card-cta {
+            background: linear-gradient(135deg, #74B9FF, #1565C0);
+            box-shadow: 0 5px 18px rgba(21,101,192,.35);
+        }
+        .card-unicorn .card-cta:hover { box-shadow: 0 8px 24px rgba(194,24,91,.45); }
+        .card-balloon .card-cta:hover { box-shadow: 0 8px 24px rgba(21,101,192,.45); }
+
+        /* ── Features strip ───────────────────── */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin-top: 40px;
+        }
+
+        .feat {
+            background: rgba(255,255,255,.55);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 18px;
+            border: 2px solid rgba(255,255,255,.6);
+            text-align: center;
+        }
+
+        .feat-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; }
+        .feat-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dk); margin-bottom: 4px; }
+        .feat-desc  { font-size: .9rem; color: var(--text-md); }
+
+        /* ── Footer ───────────────────────────── */
+        .footer {
+            text-align: center; margin-top: 48px;
+            font-size: .9rem; color: rgba(255,255,255,.7);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Decorative stars -->
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<div class="page">
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="site-logo">🎮 Math4Kids</div>
+        <a href="home.html" class="back-btn">🏠 Home</a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">✨ Choose your adventure</div>
+        <h1 class="hero-title">Pick a Game &amp; Play!</h1>
+        <p class="hero-sub">Two magical games full of colours, fun, and learning for little ones.</p>
+    </section>
+
+    <!-- Game Cards -->
+    <section class="game-grid" aria-label="Available games">
+
+        <!-- Card 1 – Unicorn Makeup -->
+        <div class="game-card card-unicorn">
+            <div class="card-banner">
+                <div class="card-number">Game 1</div>
+                <span class="card-icon">🦄</span>
+            </div>
+            <div class="card-body">
+                <span class="card-tag">🎨 Creative Play</span>
+                <h2 class="card-title">Unicorn Makeover!</h2>
+                <p class="card-desc">
+                    Give your magical unicorn a dazzling makeover! Choose colours for the horn,
+                    mane, eyes, cheeks, lips and nails. Collect stars for every look you create. ✨
+                </p>
+                <a href="index.html" class="card-cta" aria-label="Play Unicorn Makeover">
+                    Play Now 💄
+                </a>
+            </div>
+        </div>
+
+        <!-- Card 2 – Balloon Math -->
+        <div class="game-card card-balloon">
+            <div class="card-banner">
+                <div class="card-number">Game 2</div>
+                <span class="card-icon">🎈</span>
+            </div>
+            <div class="card-body">
+                <span class="card-tag">🧮 Maths Fun</span>
+                <h2 class="card-title">Balloon Math!</h2>
+                <p class="card-desc">
+                    Pop balloons to solve subtraction (4 − 2 = ?) or watch them float in for addition
+                    (1 + 2 = ?). Learn numbers 1–10 with colourful bouncing balloons! 🎯
+                </p>
+                <a href="balloon-math.html" class="card-cta" aria-label="Play Balloon Math">
+                    Play Now 🎈
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Feature strip -->
+    <section class="features" aria-label="Game features">
+        <div class="feat">
+            <span class="feat-icon">⭐</span>
+            <div class="feat-title">Earn Stars</div>
+            <div class="feat-desc">Collect a star for every correct answer or look created.</div>
+        </div>
+        <div class="feat">
+            <span class="feat-icon">🔥</span>
+            <div class="feat-title">Build Streaks</div>
+            <div class="feat-desc">Answer correctly in a row and unlock streak flames!</div>
+        </div>
+        <div class="feat">
+            <span class="feat-icon">🎊</span>
+            <div class="feat-title">Confetti Party</div>
+            <div class="feat-desc">Every win brings a burst of confetti and a happy celebration.</div>
+        </div>
+    </section>
+
+    <footer class="footer">Made with 💖 for little learners</footer>
+
+</div><!-- .page -->
+
+<script>
+    /* Scatter random tiny stars for decoration */
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 55; i++){
+        const s = document.createElement('div');
+        const size = 3 + Math.random() * 5;
+        s.className = 'star';
+        s.style.cssText = [
+            `width:${size}px`, `height:${size}px`,
+            `top:${Math.random()*100}%`,
+            `left:${Math.random()*100}%`,
+            `--d:${1.5+Math.random()*3}s`,
+            `--delay:${Math.random()*3}s`,
+        ].join(';');
+        starsEl.appendChild(s);
+    }
+</script>
+</body>
+</html>
