@@ -61,8 +61,9 @@ class EnhancedMathGame {
         
         switch(this.operation) {
             case 'add':
-                num1 = this.randomInRange(range.min, range.max);
-                num2 = this.randomInRange(range.min, range.max);
+                const addMax = range.min + Math.floor((range.max - range.min) / 2);
+                num1 = this.randomInRange(range.min, addMax);
+                num2 = this.randomInRange(range.min, addMax);
                 result = num1 + num2;
                 document.getElementById('operator').textContent = '+';
                 break;
