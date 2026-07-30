@@ -498,19 +498,29 @@
         if (p) p.classList.add('filled');
     }
 
-    // ── balloon click (subtract mode) ─────────────────
+    // ── balloon click (subtract and add modes) ────────
     function onBalloonClick(balloon){
         if (S.answered || balloon.classList.contains('popped')) return;
-        if (S.mode !== 'subtract') return;
 
         balloon.classList.add('popped');
-        fillPip(S.popped);
-        S.popped++;
 
-        el('popRow').textContent = `Popped: ${S.popped} / ${S.q.b}`;
+        if (S.mode === 'subtract'){
+            fillPip(S.popped);
+            S.popped++;
+            el('popRow').textContent = `Popped: ${S.popped} / ${S.q.b}`;
 
-        if (S.popped >= S.q.b){
-            setTimeout(revealAnswer, 420);
+            if (S.popped >= S.q.b){
+                setTimeout(revealAnswer, 420);
+            }
+        } else {
+            // Addition mode: count total popped balloons
+            S.popped++;
+            const totalBalloons = S.q.a + S.q.b;
+            el('popRow').textContent = `Popped: ${S.popped} / ${totalBalloons}`;
+
+            if (S.popped >= totalBalloons){
+                setTimeout(revealAnswer, 420);
+            }
         }
     }
 
@@ -539,21 +549,30 @@
         } else {
             // Wave 1
             for (let i = 0; i < q.a; i++){
-                arena.appendChild(makeBalloon(i * 2, false, 0));
+                const b = makeBalloon(i * 2, false, 0);
+                b.addEventListener('click', () => onBalloonClick(b));
+                b.setAttribute('aria-label', 'Balloon – click to pop');
+                b.setAttribute('role', 'button');
+                b.setAttribute('tabindex', '0');
+                b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') onBalloonClick(b); });
+                arena.appendChild(b);
             }
             el('hintRow').textContent = `${q.a} balloon${q.a > 1 ? 's' : ''}… more are coming! 👀`;
-            el('popRow').textContent  = '';
+            el('popRow').textContent  = `Popped: 0 / ${q.a + q.b}`;
 
             // Wave 2 after 2.4 s
             S.wave2Timer = setTimeout(() => {
                 if (S.answered) return;
                 for (let i = 0; i < q.b; i++){
-                    arena.appendChild(makeBalloon(i * 2 + 1, true, i * 0.1));
+                    const b = makeBalloon(i * 2 + 1, true, i * 0.1);
+                    b.addEventListener('click', () => onBalloonClick(b));
+                    b.setAttribute('aria-label', 'Balloon – click to pop');
+                    b.setAttribute('role', 'button');
+                    b.setAttribute('tabindex', '0');
+                    b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') onBalloonClick(b); });
+                    arena.appendChild(b);
                 }
-                el('hintRow').textContent = `${q.a} + ${q.b} = how many? 🤔`;
-
-                // Auto-reveal after balloons have floated in
-                setTimeout(() => { if (!S.answered) revealAnswer(); }, 1600);
+                el('hintRow').textContent = `${q.a} + ${q.b} = pop all ${q.a + q.b} to find out! 🤔`;
             }, 2400);
         }
     }
