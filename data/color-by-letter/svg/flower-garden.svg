@@ -1,0 +1,9 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-label="Flower outline worksheet">
+  <rect width="600" height="600" fill="none"/>
+  <ellipse id="petal-top" cx="300" cy="136" rx="72" ry="94" fill="#fff" stroke="#111" stroke-width="10"/>
+  <ellipse id="petal-right" cx="392" cy="228" rx="78" ry="90" fill="#fff" stroke="#111" stroke-width="10" transform="rotate(18 392 228)"/>
+  <ellipse id="petal-bottom" cx="300" cy="320" rx="72" ry="94" fill="#fff" stroke="#111" stroke-width="10"/>
+  <ellipse id="petal-left" cx="208" cy="228" rx="78" ry="90" fill="#fff" stroke="#111" stroke-width="10" transform="rotate(-18 208 228)"/>
+  <circle id="flower-center" cx="300" cy="228" r="72" fill="#fff" stroke="#111" stroke-width="10"/>
+  <path id="leaf-stem" d="M289 362 C288 346 312 346 311 362 L311 462 C348 430 397 432 440 470 C376 510 330 516 300 488 C270 516 224 510 160 470 C203 432 252 430 289 462 Z" fill="#fff" stroke="#111" stroke-width="10" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color by Letter 🎨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="color-by-letter.css">
+</head>
+<body>
+    <main class="color-page">
+        <section class="game-shell">
+            <header class="top-bar">
+                <div>
+                    <p class="eyebrow">🖍️ Watercolor Worksheet Fun</p>
+                    <h1>Color by Letter</h1>
+                    <p class="subtitle">Match each letter to its watercolor and finish the picture.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="progress-card" aria-live="polite">
+                        <span class="progress-label">Regions Colored</span>
+                        <strong id="progressValue">0 / 0</strong>
+                        <span id="levelBadge" class="level-badge">Level 1</span>
+                    </div>
+                    <a href="home.html" class="menu-btn">🏠 All Games</a>
+                </div>
+            </header>
+
+            <section class="board-layout">
+                <div class="art-column">
+                    <div class="worksheet-card">
+                        <div class="worksheet-header">
+                            <div>
+                                <p class="worksheet-label">Worksheet</p>
+                                <h2 id="worksheetTitle">Loading…</h2>
+                            </div>
+                            <p id="statusText" class="status-pill">Pick a watercolor to begin.</p>
+                        </div>
+                        <div class="worksheet-stage">
+                            <div id="worksheetMount" class="worksheet-mount" aria-live="polite"></div>
+                            <div id="sparkleLayer" class="sparkle-layer" aria-hidden="true"></div>
+                            <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="hint-panel">
+                    <div class="panel-card">
+                        <h3>Color Hint</h3>
+                        <div id="hintList" class="hint-list"></div>
+                    </div>
+                    <div class="panel-card instruction-card">
+                        <h3>How to Play</h3>
+                        <ul>
+                            <li>Pick one watercolor blob.</li>
+                            <li>Tap the matching lettered region.</li>
+                            <li>Fill every space to finish the picture.</li>
+                        </ul>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="palette-card">
+                <div class="palette-head">
+                    <div>
+                        <p class="worksheet-label">Palette</p>
+                        <h3>Watercolor Paints</h3>
+                    </div>
+                    <p class="palette-tip">Tap a glowing color, then tap a lettered shape.</p>
+                </div>
+                <div id="paletteGrid" class="palette-grid" role="listbox" aria-label="Watercolor paint palette"></div>
+            </section>
+        </section>
+    </main>
+
+    <div id="completeOverlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+        <div class="popup-card">
+            <p class="popup-emoji">🎉</p>
+            <h2 id="completeTitle">Well Done!</h2>
+            <p id="completeMessage">You colored every region.</p>
+            <button id="nextLevelButton" class="next-level-btn" type="button">Next Level</button>
+        </div>
+    </div>
+
+    <script type="module" src="color-by-letter.js"></script>
+</body>
+</html>

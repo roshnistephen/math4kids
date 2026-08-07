@@ -1,0 +1,76 @@
+{
+  "levels": [
+    {
+      "id": "flower-garden",
+      "title": "Flower Garden",
+      "svg": "data/color-by-letter/svg/flower-garden.svg",
+      "regionCount": 6,
+      "colorMap": {
+        "A": { "name": "Red", "hex": "#ff6b6b", "emoji": "🔴" },
+        "B": { "name": "Green", "hex": "#7bd389", "emoji": "🟢" },
+        "C": { "name": "Blue", "hex": "#60a5fa", "emoji": "🔵" },
+        "D": { "name": "Yellow", "hex": "#facc15", "emoji": "🟡" },
+        "E": { "name": "Purple", "hex": "#c084fc", "emoji": "🟣" },
+        "F": { "name": "Orange", "hex": "#fb923c", "emoji": "🟠" }
+      },
+      "regions": [
+        { "id": "petal-top", "letter": "A", "label": { "x": 300, "y": 112 } },
+        { "id": "petal-right", "letter": "B", "label": { "x": 392, "y": 204 } },
+        { "id": "petal-bottom", "letter": "C", "label": { "x": 300, "y": 292 } },
+        { "id": "petal-left", "letter": "D", "label": { "x": 208, "y": 204 } },
+        { "id": "flower-center", "letter": "E", "label": { "x": 300, "y": 204 } },
+        { "id": "leaf-stem", "letter": "F", "label": { "x": 300, "y": 372 } }
+      ]
+    },
+    {
+      "id": "caterpillar-trail",
+      "title": "Caterpillar Trail",
+      "svg": "data/color-by-letter/svg/caterpillar-trail.svg",
+      "regionCount": 7,
+      "colorMap": {
+        "A": { "name": "Sun Red", "hex": "#ff7a8a", "emoji": "🔴" },
+        "B": { "name": "Leaf Green", "hex": "#6ee7b7", "emoji": "🟢" },
+        "C": { "name": "Sky Blue", "hex": "#5da9ff", "emoji": "🔵" },
+        "D": { "name": "Butter Yellow", "hex": "#fde047", "emoji": "🟡" },
+        "E": { "name": "Berry Purple", "hex": "#d8b4fe", "emoji": "🟣" },
+        "F": { "name": "Carrot Orange", "hex": "#fb923c", "emoji": "🟠" },
+        "G": { "name": "Pink", "hex": "#f9a8d4", "emoji": "🩷" }
+      },
+      "regions": [
+        { "id": "head", "letter": "A", "label": { "x": 124, "y": 270 } },
+        { "id": "segment-1", "letter": "B", "label": { "x": 210, "y": 250 } },
+        { "id": "segment-2", "letter": "C", "label": { "x": 286, "y": 232 } },
+        { "id": "segment-3", "letter": "D", "label": { "x": 362, "y": 238 } },
+        { "id": "segment-4", "letter": "E", "label": { "x": 438, "y": 258 } },
+        { "id": "segment-5", "letter": "F", "label": { "x": 506, "y": 286 } },
+        { "id": "leaf", "letter": "G", "label": { "x": 306, "y": 388 } }
+      ]
+    },
+    {
+      "id": "butterfly-garden",
+      "title": "Butterfly Garden",
+      "svg": "data/color-by-letter/svg/butterfly-garden.svg",
+      "regionCount": 8,
+      "colorMap": {
+        "A": { "name": "Cherry Red", "hex": "#fb7185", "emoji": "🔴" },
+        "B": { "name": "Mint Green", "hex": "#86efac", "emoji": "🟢" },
+        "C": { "name": "Ocean Blue", "hex": "#60a5fa", "emoji": "🔵" },
+        "D": { "name": "Sunny Yellow", "hex": "#facc15", "emoji": "🟡" },
+        "E": { "name": "Lavender", "hex": "#c4b5fd", "emoji": "🟣" },
+        "F": { "name": "Tangerine", "hex": "#fb923c", "emoji": "🟠" },
+        "G": { "name": "Bubblegum", "hex": "#f9a8d4", "emoji": "🩷" },
+        "H": { "name": "Aqua", "hex": "#67e8f9", "emoji": "🩵" }
+      },
+      "regions": [
+        { "id": "wing-top-left", "letter": "A", "label": { "x": 196, "y": 160 } },
+        { "id": "wing-bottom-left", "letter": "B", "label": { "x": 188, "y": 308 } },
+        { "id": "wing-top-right", "letter": "C", "label": { "x": 404, "y": 160 } },
+        { "id": "wing-bottom-right", "letter": "D", "label": { "x": 412, "y": 308 } },
+        { "id": "body", "letter": "E", "label": { "x": 300, "y": 248 } },
+        { "id": "head", "letter": "F", "label": { "x": 300, "y": 112 } },
+        { "id": "spot-left", "letter": "G", "label": { "x": 210, "y": 218 } },
+        { "id": "spot-right", "letter": "H", "label": { "x": 390, "y": 218 } }
+      ]
+    }
+  ]
+}

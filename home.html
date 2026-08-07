@@ -17,6 +17,7 @@
             --shadow: 0 12px 40px rgba(91, 79, 168, 0.2);
             --unicorn: linear-gradient(135deg, #FF85A2, #C2185B);
             --math: linear-gradient(135deg, #74B9FF, #1565C0);
+            --letter: linear-gradient(135deg, #F9A8D4, #8B5CF6);
         }
         
         html { scroll-behavior: smooth; }
@@ -84,6 +85,7 @@
         
         .game-card:nth-child(1) { animation-delay: 0.1s; }
         .game-card:nth-child(2) { animation-delay: 0.2s; }
+        .game-card:nth-child(3) { animation-delay: 0.3s; }
         
         .game-card:hover {
             transform: translateY(-10px);
@@ -105,6 +107,7 @@
         
         .card-banner.unicorn { background: var(--unicorn); }
         .card-banner.math { background: var(--math); }
+        .card-banner.letter { background: var(--letter); }
         
         .game-card:nth-child(1) .card-banner { animation: pulse 3s ease-in-out infinite; }
         .game-card:nth-child(2) .card-banner { animation: pulse 3.2s ease-in-out infinite 0.2s; }
@@ -124,6 +127,7 @@
         
         .card-tag.unicorn { background: #FFE4F0; color: #C2185B; }
         .card-tag.math { background: #E3F2FF; color: #1565C0; }
+        .card-tag.letter { background: #F5E8FF; color: #7C3AED; }
         
         .card-title {
             font-size: 1.6rem;
@@ -156,6 +160,7 @@
         }
         
         .card-btn.math { background: var(--math); }
+        .card-btn.letter { background: var(--letter); }
         
         .card-btn:hover {
             transform: translateY(-2px);
@@ -227,7 +232,7 @@
         <header>
             <div class="logo">🎮 Math4Kids</div>
             <h1>Pick a Game & Play!</h1>
-            <p class="subtitle">Two fun games for little learners</p>
+            <p class="subtitle">Three fun games for little learners</p>
         </header>
         
         <div class="game-grid">
@@ -248,6 +253,16 @@
                     <h2 class="card-title">Balloon Math!</h2>
                     <p class="card-desc">Pop balloons and solve math problems!</p>
                     <button class="card-btn math">Play Now 🎯</button>
+                </div>
+            </a>
+            
+            <a href="color-by-letter.html" class="game-card">
+                <div class="card-banner letter">🖍️</div>
+                <div class="card-body">
+                    <span class="card-tag letter">🔤 Colors</span>
+                    <h2 class="card-title">Color by Letter!</h2>
+                    <p class="card-desc">Match letters to watercolor paints and finish each worksheet!</p>
+                    <button class="card-btn letter">Play Now 🎨</button>
                 </div>
             </a>
         </div>

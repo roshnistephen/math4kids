@@ -1,0 +1,17 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-label="Caterpillar outline worksheet">
+  <rect width="600" height="600" fill="none"/>
+  <circle id="head" cx="124" cy="272" r="64" fill="#fff" stroke="#111" stroke-width="10"/>
+  <circle id="segment-1" cx="212" cy="248" r="58" fill="#fff" stroke="#111" stroke-width="10"/>
+  <circle id="segment-2" cx="286" cy="228" r="56" fill="#fff" stroke="#111" stroke-width="10"/>
+  <circle id="segment-3" cx="362" cy="236" r="56" fill="#fff" stroke="#111" stroke-width="10"/>
+  <circle id="segment-4" cx="438" cy="258" r="56" fill="#fff" stroke="#111" stroke-width="10"/>
+  <circle id="segment-5" cx="506" cy="288" r="50" fill="#fff" stroke="#111" stroke-width="10"/>
+  <path id="leaf" d="M238 406 C286 338 374 340 470 400 C398 466 312 490 226 460 C190 446 176 424 170 404 C192 388 214 386 238 406 Z" fill="#fff" stroke="#111" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M102 204 C86 170 74 144 84 118" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M148 204 C160 168 176 144 196 126" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="84" cy="110" r="10" fill="#fff" stroke="#111" stroke-width="6"/>
+  <circle cx="204" cy="118" r="10" fill="#fff" stroke="#111" stroke-width="6"/>
+  <circle cx="102" cy="252" r="8" fill="#111"/>
+  <circle cx="148" cy="252" r="8" fill="#111"/>
+  <path d="M104 302 C120 318 148 318 164 302" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+</svg>
