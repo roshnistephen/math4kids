@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F4F1FF">
+<title>Unicorn Makeover — LokaKids</title>
+<meta name="description" content="Pick colours for a magical unicorn's horn, mane, eyes, blush, lips and nail polish — then save a photo of your sparkly new friend.">
+<link rel="icon" href="images/characters/image_ComfyUI_00013__extracted.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/unicorn.css">
+</head>
+<body>
+
+<div class="decor" aria-hidden="true">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="blob blob--3"></div>
+</div>
+
+<header class="topbar">
+    <div class="topbar__inner">
+        <a class="brand" href="index.html" aria-label="Back to LokaKids home">
+            <span class="brand__mark"><img src="images/characters/image_ComfyUI_00013__extracted.png" alt=""></span>
+            <span>
+                <span class="brand__name">Unicorn Makeover</span>
+                <span class="brand__tag">Magical beauty salon</span>
+            </span>
+        </a>
+        <span class="topbar__spacer"></span>
+        <div class="topbar__tools">
+            <span class="star-count" data-star-total title="Stars you have collected">
+                ⭐ <span class="star-count__num">0</span>
+            </span>
+            <button class="btn btn--icon" data-sound-toggle type="button" aria-pressed="true">🔊</button>
+            <a class="btn btn--icon" href="index.html" title="Back to menu" aria-label="Back to menu">🏠</a>
+        </div>
+    </div>
+</header>
+
+<main class="shell studio">
+
+    <!-- Canvas -->
+    <section class="stage">
+        <canvas class="stage__canvas" id="stageCanvas" width="480" height="480"
+                role="img" aria-label="Your unicorn — colours you choose appear here"></canvas>
+        <div class="stage__progress">
+            <p class="stage__label">Looks done: <b id="doneCount">0 / 6</b></p>
+            <p class="stage__stars" id="doneStars" aria-hidden="true"></p>
+        </div>
+    </section>
+
+    <!-- Makeup kit -->
+    <section class="kit">
+        <div>
+            <h2 class="kit__title">💄 Choose a part <small>then a colour</small></h2>
+            <div class="parts" id="parts" role="listbox" aria-label="Parts to decorate"></div>
+        </div>
+
+        <div>
+            <h2 class="kit__title">🎨 Pick a colour</h2>
+            <div class="swatches" id="swatches" role="listbox" aria-label="Colour palette"></div>
+            <p class="swatch-name" id="swatchName"></p>
+        </div>
+
+        <div class="kit__actions">
+            <button class="btn btn--candy" type="button" id="btnSurprise">Surprise me 🎲</button>
+            <button class="btn btn--ghost" type="button" id="btnReset">Start over 🔄</button>
+            <button class="btn btn--primary btn--wide" type="button" id="btnSave">Save my photo 📸</button>
+        </div>
+
+        <p class="kit__hint">
+            Tap a colour to paint it on — or use <kbd>↑</kbd><kbd>↓</kbd> for parts,
+            <kbd>←</kbd><kbd>→</kbd> for colours and <kbd>Enter</kbd> to apply.
+        </p>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <p>⭐ 1 star for every part you decorate · <a href="index.html">Back to all games</a></p>
+</footer>
+
+<!-- Finished -->
+<div class="modal" id="doneModal" role="dialog" aria-modal="true" aria-labelledby="doneTitle" hidden>
+    <div class="modal__card">
+        <p class="modal__emoji">🦄💖✨</p>
+        <h2 class="modal__title" id="doneTitle">So beautiful!</h2>
+        <p class="modal__text">Your unicorn loves the new look.</p>
+        <p class="stage__stars" id="doneStarRow" aria-hidden="true"></p>
+        <div class="modal__actions">
+            <button class="btn btn--primary" type="button" id="btnSaveDone">Save my photo 📸</button>
+            <button class="btn btn--candy" type="button" id="btnNewLook">New look 🎨</button>
+            <button class="btn btn--ghost" type="button" id="btnKeep">Keep playing ✨</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/kid.js"></script>
+<script src="js/unicorn.js"></script>
+</body>
+</html>

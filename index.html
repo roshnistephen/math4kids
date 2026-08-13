@@ -1,70 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unicorn Makeover! 🦄✨</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F4F1FF">
+<title>LokaKids — Playful Learning Games for Little Ones</title>
+<meta name="description" content="Bright, gentle learning games for ages 3–6. Pop balloons to practise adding and taking away, colour by number, and give a magical unicorn a makeover. Free, no ads, no sign-up.">
+<link rel="icon" href="images/characters/image_ComfyUI_00013__extracted.png">
+<link rel="apple-touch-icon" href="images/characters/image_ComfyUI_00013__extracted.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/home.css">
+<script>document.documentElement.className += ' js';</script>
 </head>
 <body>
-    <main class="app">
-        <section class="game-shell">
-            <header class="top-bar">
-                <div class="title-area">
-                    <p class="eyebrow">✨ Magical Beauty Salon ✨</p>
-                    <h1>Unicorn Makeover! 🦄</h1>
-                    <a href="home.html" class="all-games-btn">🎮 All Games</a>
+
+<!-- Soft background décor -->
+<div class="decor" aria-hidden="true">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="blob blob--3"></div>
+    <div class="floaty" style="top:14%; left:1.5%;  animation-delay:.2s">⭐</div>
+    <div class="floaty" style="top:44%; right:1.5%; animation-delay:1.4s">🎈</div>
+    <div class="floaty" style="top:72%; left:2%;    animation-delay:2.1s">🌈</div>
+    <div class="floaty" style="top:88%; right:2%;   animation-delay:.9s">✨</div>
+</div>
+
+<!-- Top bar -->
+<header class="topbar">
+    <div class="topbar__inner">
+        <a class="brand" href="index.html" aria-label="LokaKids home">
+            <span class="brand__mark"><img src="images/characters/image_ComfyUI_00007__extracted.png" alt=""></span>
+            <span>
+                <span class="brand__name">Loka<span>Kids</span></span>
+                <span class="brand__tag">Play &amp; learn</span>
+            </span>
+        </a>
+        <span class="topbar__spacer"></span>
+        <div class="topbar__tools">
+            <span class="star-count" data-star-total title="Stars you have collected">
+                ⭐ <span class="star-count__num">0</span>
+            </span>
+            <button class="btn btn--icon" data-sound-toggle type="button" aria-pressed="true">🔊</button>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- ── Hero ─────────────────────────────────────────────────────── -->
+    <section class="shell hero">
+        <div>
+            <span class="hero__badge"><b>🎈</b> Made for ages 3 – 6</span>
+            <h1 class="hero__title">Little games that make <em>big thinkers</em>.</h1>
+            <p class="hero__lede">
+                Three gentle, colourful games your child can play on their own — counting,
+                adding, colouring and a whole lot of giggling. No ads, no sign-up, no rush.
+            </p>
+            <div class="hero__actions">
+                <a class="btn btn--primary btn--lg" href="#games">Start playing 🎮</a>
+                <a class="btn btn--ghost btn--lg" href="#grown-ups">For grown-ups</a>
+            </div>
+            <div class="hero__proof">
+                <span class="chip chip--mint">✅ Free forever</span>
+                <span class="chip chip--sky">🛡️ No ads &amp; no sign-up</span>
+                <span class="chip chip--candy">📱 Tablet friendly</span>
+            </div>
+        </div>
+
+        <div class="hero__stage" aria-hidden="true">
+            <div class="stage__ring"></div>
+            <img class="stage__hero-img" src="images/characters/image_ComfyUI_00013__extracted.png" alt="">
+            <img class="stage__pal stage__pal--a" src="images/characters/image_ComfyUI_00001__extracted.png" alt="">
+            <img class="stage__pal stage__pal--b" src="images/characters/image_ComfyUI_00005__extracted.png" alt="">
+            <div class="stage__bubble">⭐ Earn stars as you play!</div>
+        </div>
+    </section>
+
+    <!-- ── Games ────────────────────────────────────────────────────── -->
+    <section class="shell section" id="games">
+        <div class="section__head section__head--center reveal">
+            <span class="section__eyebrow">🎮 Pick a game</span>
+            <h2 class="section__title">Three worlds to play in</h2>
+            <p class="section__lede">Tap a card to jump straight in. Everything saves on this device, so stars are still here tomorrow.</p>
+        </div>
+
+        <div class="games">
+
+            <article class="game-card reveal">
+                <div class="game-card__art game-card__art--balloon">
+                    <span class="game-card__sticker">🎈</span>
+                    <span class="game-card__sticker">➕</span>
+                    <span class="game-card__sticker">➖</span>
+                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00006__extracted.png" alt="A smiling cartoon cat">
                 </div>
-                <div class="progress-card" aria-live="polite">
-                    <span class="progress-label">Looks Done</span>
-                    <strong id="progressValue">0 / 6</strong>
-                    <div class="progress-stars" id="progressStars" aria-hidden="true"></div>
-                </div>
-            </header>
-
-            <section class="board-section">
-                <div class="canvas-frame">
-                    <canvas id="gameCanvas" width="480" height="480" aria-label="Unicorn makeover canvas"></canvas>
-                    <div id="completeOverlay" class="dialog-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
-                        <div class="dialog-card">
-                            <p class="dialog-emoji">🦄💖✨</p>
-                            <h2 id="completeTitle">So Beautiful!</h2>
-                            <p>Your unicorn loves the makeover!</p>
-                            <p id="finalStars" class="final-stars"></p>
-                            <button id="resetButton" class="primary-button" type="button">New Look 🎨</button>
-                        </div>
+                <div class="game-card__body">
+                    <div class="game-card__meta">
+                        <span class="chip chip--sky">🧮 Maths</span>
+                        <span class="chip chip--mint">Ages 4+</span>
+                    </div>
+                    <h3 class="game-card__title">Balloon Math</h3>
+                    <p class="game-card__desc">
+                        Pop the balloons to act out the sum, then choose the answer.
+                        Ten questions per round, with a friendly hint whenever it's needed.
+                    </p>
+                    <div class="game-card__skills">
+                        <span>🔢 Counting</span>
+                        <span>➕ Adding</span>
+                        <span>➖ Taking away</span>
+                    </div>
+                    <div class="game-card__foot">
+                        <a class="btn btn--sky" href="balloon-math.html">Play now 🎈</a>
+                        <span class="game-card__stars">⭐ <span data-star-game="balloon" data-star-word>0 stars</span></span>
                     </div>
                 </div>
+            </article>
 
-                <aside class="makeup-panel">
-                    <div class="panel-section">
-                        <h3 class="panel-title">💄 Choose Makeup</h3>
-                        <div class="parts-list" id="partsList" role="listbox" aria-label="Makeup items"></div>
+            <article class="game-card reveal" style="--reveal-delay:.12s">
+                <div class="game-card__art game-card__art--unicorn">
+                    <span class="game-card__sticker">💄</span>
+                    <span class="game-card__sticker">✨</span>
+                    <span class="game-card__sticker">🌸</span>
+                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00013__extracted.png" alt="A pink cartoon unicorn">
+                </div>
+                <div class="game-card__body">
+                    <div class="game-card__meta">
+                        <span class="chip chip--candy">🎨 Creative</span>
+                        <span class="chip chip--mint">Ages 3+</span>
                     </div>
+                    <h3 class="game-card__title">Unicorn Makeover</h3>
+                    <p class="game-card__desc">
+                        Choose colours for the horn, mane, eyes and more — then save a photo
+                        of your sparkly new friend to keep.
+                    </p>
+                    <div class="game-card__skills">
+                        <span>🎨 Colours</span>
+                        <span>👆 Fine motor</span>
+                        <span>💡 Choice making</span>
+                    </div>
+                    <div class="game-card__foot">
+                        <a class="btn btn--candy" href="unicorn-makeover.html">Play now 🦄</a>
+                        <span class="game-card__stars">⭐ <span data-star-game="unicorn" data-star-word>0 stars</span></span>
+                    </div>
+                </div>
+            </article>
 
-                    <div class="panel-section">
-                        <h3 class="panel-title">🎨 Pick a Color</h3>
-                        <div class="color-grid" id="colorGrid" role="listbox" aria-label="Color palette"></div>
+            <article class="game-card reveal" style="--reveal-delay:.24s">
+                <div class="game-card__art game-card__art--colour">
+                    <span class="game-card__sticker">1️⃣</span>
+                    <span class="game-card__sticker">🖍️</span>
+                    <span class="game-card__sticker">2️⃣</span>
+                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00005__extracted.png" alt="A smiling cartoon princess">
+                </div>
+                <div class="game-card__body">
+                    <div class="game-card__meta">
+                        <span class="chip chip--sun">🖍️ Colouring</span>
+                        <span class="chip chip--mint">Ages 3+</span>
                     </div>
+                    <h3 class="game-card__title">Colour by Number</h3>
+                    <p class="game-card__desc">
+                        Follow the key — 1 is red, 2 is blue — and bring a unicorn, caterpillar,
+                        butterfly or fish to life, one numbered shape at a time.
+                    </p>
+                    <div class="game-card__skills">
+                        <span>🔢 Number spotting</span>
+                        <span>🎨 Colour names</span>
+                        <span>🧩 Matching</span>
+                    </div>
+                    <div class="game-card__foot">
+                        <a class="btn btn--mint" href="color-by-number.html">Play now 🖍️</a>
+                        <span class="game-card__stars">⭐ <span data-star-game="colour" data-star-word>0 stars</span></span>
+                    </div>
+                </div>
+            </article>
 
-                    <div class="panel-section action-section">
-                        <button id="applyButton" class="apply-button" type="button">
-                            ✨ Apply! <span class="key-hint">Enter</span>
-                        </button>
-                        <button id="clearButton" class="clear-button" type="button">Reset 🔄</button>
-                    </div>
+        </div>
+    </section>
 
-                    <div class="panel-section hint-section">
-                        <p class="hint-text">
-                            <span>⬆⬇ Choose makeup</span>
-                            <span>⬅➡ Pick a color</span>
-                            <span><kbd>Enter</kbd> to Apply!</span>
-                        </p>
+    <!-- ── Why kids love it ─────────────────────────────────────────── -->
+    <section class="shell section">
+        <div class="section__head section__head--center reveal">
+            <span class="section__eyebrow">💗 Why little ones love it</span>
+            <h2 class="section__title">Kind by design</h2>
+            <p class="section__lede">Big buttons, soft colours and gentle feedback — nothing flashes, nobody loses.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature reveal">
+                <div class="feature__icon">👆</div>
+                <h3 class="feature__title">Thumb-sized buttons</h3>
+                <p class="feature__text">Every tap target is big enough for small hands and wobbly fingers.</p>
+            </div>
+            <div class="feature reveal" style="--reveal-delay:.08s">
+                <div class="feature__icon">🫂</div>
+                <h3 class="feature__title">No fail states</h3>
+                <p class="feature__text">A wrong tap earns a hint and another go — never a buzzer and a red cross.</p>
+            </div>
+            <div class="feature reveal" style="--reveal-delay:.16s">
+                <div class="feature__icon">⭐</div>
+                <h3 class="feature__title">Stars that stay</h3>
+                <p class="feature__text">Stars are saved right on the device — no account, no email, ever.</p>
+            </div>
+            <div class="feature reveal" style="--reveal-delay:.24s">
+                <div class="feature__icon">🔇</div>
+                <h3 class="feature__title">Sound you control</h3>
+                <p class="feature__text">One tap mutes everything, for quiet cars and sleeping siblings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Grown-ups ────────────────────────────────────────────────── -->
+    <section class="shell section" id="grown-ups">
+        <div class="panel grownups reveal">
+            <div>
+                <span class="section__eyebrow">👋 For grown-ups</span>
+                <h2 class="section__title">What your child is practising</h2>
+                <p class="section__lede">
+                    Balloon Math models each sum with objects a child can touch and count —
+                    the concrete step that comes before working with numbers on paper.
+                    Colour by Number practises number recognition, and Unicorn Makeover
+                    is free play with no right answer at all.
+                </p>
+
+                <div class="grownups__list">
+                    <div class="grownups__item">
+                        <i>1</i>
+                        <p><b>See it</b> The sum appears with the balloons that match it.</p>
                     </div>
-                </aside>
-            </section>
-        </section>
-    </main>
-    <script src="game.js"></script>
+                    <div class="grownups__item">
+                        <i>2</i>
+                        <p><b>Do it</b> Your child pops or counts the balloons to act the sum out.</p>
+                    </div>
+                    <div class="grownups__item">
+                        <i>3</i>
+                        <p><b>Answer it</b> They choose from three answers, with a hint if the first try misses.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <p class="progress-card__label">Stars collected on this device</p>
+                <p class="progress-card__big" data-star-total><span class="star-count__num">0</span></p>
+                <div class="progress-card__rows">
+                    <div class="progress-card__row"><span>🎈 Balloon Math</span> <b data-star-game="balloon">0</b></div>
+                    <div class="progress-card__row"><span>🦄 Unicorn Makeover</span> <b data-star-game="unicorn">0</b></div>
+                    <div class="progress-card__row"><span>🖍️ Colour by Number</span> <b data-star-game="colour">0</b></div>
+                </div>
+                <button class="btn btn--ghost btn--sm" type="button" id="resetStars">Reset stars 🧹</button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="site-footer__links">
+        <a href="balloon-math.html">Balloon Math</a>
+        <a href="color-by-number.html">Colour by Number</a>
+        <a href="unicorn-makeover.html">Unicorn Makeover</a>
+        <a href="#grown-ups">For grown-ups</a>
+    </div>
+    <p>Made with 💖 for little learners · © <span data-year>2026</span> LokaKids</p>
+</footer>
+
+<script src="js/kid.js"></script>
+<script>
+    document.getElementById('resetStars').addEventListener('click', function () {
+        if (confirm('Clear all stars collected on this device?')) {
+            Kid.Stars.reset();
+            Kid.Sound.tap();
+        }
+    });
+</script>
 </body>
 </html>
