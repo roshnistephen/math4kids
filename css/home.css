@@ -158,6 +158,11 @@
 .game-card__art--balloon { background: linear-gradient(150deg, #CFEBFF 0%, #DFF6EC 60%, #FFF0D6 100%); }
 .game-card__art--colour  { background: linear-gradient(150deg, #FFE9C7 0%, #FFDCE8 55%, #E6E4FF 100%); }
 
+.game-card__art--sky   { background: linear-gradient(150deg, #CFEBFF 0%, #E6E4FF 100%); }
+.game-card__art--grape { background: linear-gradient(150deg, #E8D5FF 0%, #FFD3E7 100%); }
+.game-card__art--sun   { background: linear-gradient(150deg, #FFF0C7 0%, #FFDCC8 100%); }
+.game-card__art--mint  { background: linear-gradient(150deg, #D5F7EC 0%, #DCE6FF 100%); }
+
 .game-card__art::before {
     content: '';
     position: absolute;
