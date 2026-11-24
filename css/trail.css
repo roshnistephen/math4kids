@@ -1,0 +1,25 @@
+/* Unicorn Trail — pastel fantasy maze */
+.trail-page { background: linear-gradient(180deg, #FFEAF4 0%, #F0E8FF 48%, #E2F0FF 100%) fixed; }
+.trail-page .blob--1 { background: #FFC2DC; }
+.trail-page .blob--2 { background: #D6C6FF; }
+.trail-page .blob--3 { background: #BFE8FF; }
+
+.twinkles { position: absolute; inset: 0; }
+.twinkles i { position: absolute; width: var(--s); height: var(--s); background: #fff; border-radius: 50%; box-shadow: 0 0 10px 3px rgba(255,255,255,.9), 0 0 18px 6px rgba(190,160,255,.45); opacity: 0; animation: twinkle var(--d) ease-in-out infinite; animation-delay: var(--dl); left: var(--x); top: var(--y); }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.4); } 50% { opacity: .95; transform: scale(1); } }
+
+.trail { max-width: 660px; margin: 0 auto; width: 100%; display: grid; gap: 14px; }
+.trail__hud { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 10px; }
+.chipbox { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--r-pill); background: rgba(255,255,255,.88); box-shadow: var(--shadow-s); font: 600 1rem 'Fredoka', sans-serif; color: var(--ink-soft); }
+.chipbox b { color: var(--grape-deep); }
+.trail__msg { text-align: center; min-height: 1.7em; font: 600 clamp(1.05rem, 3.4vw, 1.3rem) 'Fredoka', sans-serif; color: var(--ink); }
+
+.trail__board { position: relative; padding: clamp(8px, 2vw, 14px); border-radius: var(--r-lg); background: linear-gradient(145deg, #FFF 0%, #FFE9F5 45%, #E9E0FF 100%); box-shadow: var(--shadow-l), inset 0 0 0 3px rgba(255,255,255,.9); }
+.trail__board canvas { display: block; width: 100%; border-radius: calc(var(--r-lg) - 10px); touch-action: none; cursor: grab; outline: none; -webkit-tap-highlight-color: transparent; user-select: none; }
+.trail__board canvas:active { cursor: grabbing; }
+.trail__board canvas:focus-visible { box-shadow: 0 0 0 4px var(--grape); }
+
+.trail__tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.trail__tools .btn { min-height: 48px; }
+
+@media (prefers-reduced-motion: reduce) { .twinkles i { animation: none; opacity: .6; } }
