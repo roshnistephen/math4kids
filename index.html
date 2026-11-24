@@ -4,400 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#F4F1FF">
-<title>LokaKids — Playful Learning Games for Little Ones</title>
-<meta name="description" content="Bright, gentle learning games for ages 3–6. Pop balloons to practise adding and taking away, colour by number, and give a magical unicorn a makeover. Free, no ads, no sign-up.">
-<link rel="icon" href="images/characters/image_ComfyUI_00013__extracted.png">
-<link rel="apple-touch-icon" href="images/characters/image_ComfyUI_00013__extracted.png">
+<title>Unicorn Trail — A Magical Maze Puzzle Game</title>
+<meta name="description" content="Draw a rainbow path to guide a lost unicorn through a magical maze and safely home. Collect sparkles, dodge cute obstacles and play three levels. Free, no ads, no sign-up.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Unicorn Trail">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/trail/unicorn.png">
+<link rel="apple-touch-icon" href="images/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/home.css">
-<script>document.documentElement.className += ' js';</script>
 </head>
-<body>
+<body class="land">
 
-<!-- Soft background décor -->
 <div class="decor" aria-hidden="true">
     <div class="blob blob--1"></div>
     <div class="blob blob--2"></div>
     <div class="blob blob--3"></div>
-    <div class="floaty" style="top:14%; left:1.5%;  animation-delay:.2s">⭐</div>
-    <div class="floaty" style="top:44%; right:1.5%; animation-delay:1.4s">🎈</div>
-    <div class="floaty" style="top:72%; left:2%;    animation-delay:2.1s">🌈</div>
-    <div class="floaty" style="top:88%; right:2%;   animation-delay:.9s">✨</div>
+    <i class="cloud" style="--y:8%;--s:1;--d:70s;--dl:-10s"></i>
+    <i class="cloud" style="--y:34%;--s:.7;--d:90s;--dl:-55s"></i>
+    <i class="cloud" style="--y:70%;--s:.9;--d:80s;--dl:-30s"></i>
 </div>
 
-<!-- Top bar -->
 <header class="topbar">
     <div class="topbar__inner">
-        <a class="brand" href="index.html" aria-label="LokaKids home">
-            <span class="brand__mark"><img src="images/characters/image_ComfyUI_00007__extracted.png" alt=""></span>
+        <a class="brand" href="index.html" aria-label="Unicorn Trail home">
+            <span class="brand__mark"><img src="images/trail/unicorn.png" alt=""></span>
             <span>
-                <span class="brand__name">Loka<span>Kids</span></span>
-                <span class="brand__tag">Play &amp; learn</span>
+                <span class="brand__name">Unicorn Trail</span>
+                <span class="brand__tag">by LokaKids</span>
             </span>
         </a>
         <span class="topbar__spacer"></span>
         <div class="topbar__tools">
-            <span class="star-count" data-star-total title="Stars you have collected">
-                ⭐ <span class="star-count__num">0</span>
-            </span>
-            <button class="btn btn--icon" data-sound-toggle type="button" aria-pressed="true">🔊</button>
+            <span class="star-count" data-star-total title="Stars you have collected">⭐ <span class="star-count__num">0</span></span>
+            <button class="btn btn--icon" data-sound-toggle type="button" aria-pressed="true" aria-label="Sound on or off">🔊</button>
         </div>
     </div>
 </header>
 
 <main>
-
-    <!-- ── Hero ─────────────────────────────────────────────────────── -->
-    <section class="shell hero">
-        <div>
-            <span class="hero__badge"><b>🎈</b> Made for ages 3 – 6</span>
-            <h1 class="hero__title">Little games that make <em>big thinkers</em>.</h1>
-            <p class="hero__lede">
-                Eight gentle, colourful games your child can play on their own — counting,
-                adding, colouring and a whole lot of giggling. No ads, no sign-up, no rush.
-            </p>
-            <div class="hero__actions">
-                <a class="btn btn--primary btn--lg" href="#games">Start playing 🎮</a>
-                <a class="btn btn--ghost btn--lg" href="#grown-ups">For grown-ups</a>
+    <section class="shell land-hero">
+        <div class="land-hero__text">
+            <span class="land-badge">🦄 Free maze puzzle · Ages 4+</span>
+            <h1 class="land-title">Guide the lost unicorn <em>home</em>.</h1>
+            <p class="land-lede">Draw a rainbow path through the magical maze, collect sparkles and dodge the cute obstacles to reach the castle.</p>
+            <div class="land-actions">
+                <a class="btn btn--primary btn--lg" href="unicorn-trail.html">Play now ▶</a>
             </div>
-            <div class="hero__proof">
-                <span class="chip chip--mint">✅ Free forever</span>
-                <span class="chip chip--sky">🛡️ No ads &amp; no sign-up</span>
-                <span class="chip chip--candy">📱 Tablet friendly</span>
-            </div>
+            <p class="land-note">No ads · No sign-up · Works on phones, tablets and computers</p>
         </div>
-
-        <div class="hero__stage" aria-hidden="true">
-            <div class="stage__ring"></div>
-            <img class="stage__hero-img" src="images/characters/image_ComfyUI_00013__extracted.png" alt="">
-            <img class="stage__pal stage__pal--a" src="images/characters/image_ComfyUI_00001__extracted.png" alt="">
-            <img class="stage__pal stage__pal--b" src="images/characters/image_ComfyUI_00005__extracted.png" alt="">
-            <div class="stage__bubble">⭐ Earn stars as you play!</div>
+        <div class="land-stage" aria-hidden="true">
+                        <img class="land-stage__unicorn" src="images/trail/unicorn.png" alt="">
+            <img class="land-stage__castle" src="images/trail/castle.png" alt="">
+            <img class="land-stage__star land-stage__star--a" src="images/trail/star.png" alt="">
+            <img class="land-stage__star land-stage__star--b" src="images/trail/star.png" alt="">
         </div>
     </section>
 
-    <!-- ── Games ────────────────────────────────────────────────────── -->
-    <section class="shell section" id="games">
-        <div class="section__head section__head--center reveal">
-            <span class="section__eyebrow">🎮 Pick a game</span>
-            <h2 class="section__title">Eight games to explore</h2>
-            <p class="section__lede">Tap a card to jump straight in. Everything saves on this device, so stars are still here tomorrow.</p>
-        </div>
-
-        <div class="games">
-
-            <article class="game-card reveal">
-                <div class="game-card__art game-card__art--balloon">
-                    <span class="game-card__sticker">🎈</span>
-                    <span class="game-card__sticker">➕</span>
-                    <span class="game-card__sticker">➖</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00006__extracted.png" alt="A smiling cartoon cat">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta">
-                        <span class="chip chip--sky">🧮 Maths</span>
-                        <span class="chip chip--mint">Ages 4+</span>
-                    </div>
-                    <h3 class="game-card__title">Balloon Math</h3>
-                    <p class="game-card__desc">
-                        Pop the balloons to act out the sum, then choose the answer.
-                        Ten questions per round, with a friendly hint whenever it's needed.
-                    </p>
-                    <div class="game-card__skills">
-                        <span>🔢 Counting</span>
-                        <span>➕ Adding</span>
-                        <span>➖ Taking away</span>
-                    </div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--sky" href="balloon-math.html">Play now 🎈</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="balloon" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
+    <section class="shell land-section">
+        <h2 class="land-h2">How to play</h2>
+        <div class="land-steps">
+            <article class="land-step">
+                <img src="images/trail/rainbow.png" alt="">
+                <h3>Draw a path</h3>
+                <p>Drag your finger or use the arrow keys from the unicorn to the castle.</p>
             </article>
-
-            <article class="game-card reveal" style="--reveal-delay:.12s">
-                <div class="game-card__art game-card__art--unicorn">
-                    <span class="game-card__sticker">💄</span>
-                    <span class="game-card__sticker">✨</span>
-                    <span class="game-card__sticker">🌸</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00013__extracted.png" alt="A pink cartoon unicorn">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta">
-                        <span class="chip chip--candy">🎨 Creative</span>
-                        <span class="chip chip--mint">Ages 3+</span>
-                    </div>
-                    <h3 class="game-card__title">Unicorn Makeover</h3>
-                    <p class="game-card__desc">
-                        Choose colours for the horn, mane, eyes and more — then save a photo
-                        of your sparkly new friend to keep.
-                    </p>
-                    <div class="game-card__skills">
-                        <span>🎨 Colours</span>
-                        <span>👆 Fine motor</span>
-                        <span>💡 Choice making</span>
-                    </div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--candy" href="unicorn-makeover.html">Play now 🦄</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="unicorn" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
+            <article class="land-step land-step--good">
+                <img src="images/trail/star.png" alt="">
+                <h3>Collect sparkles</h3>
+                <p>Every sparkle you pass through is worth <b>+10</b> points.</p>
             </article>
-
-            <article class="game-card reveal" style="--reveal-delay:.24s">
-                <div class="game-card__art game-card__art--colour">
-                    <span class="game-card__sticker">1️⃣</span>
-                    <span class="game-card__sticker">🖍️</span>
-                    <span class="game-card__sticker">2️⃣</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00005__extracted.png" alt="A smiling cartoon princess">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta">
-                        <span class="chip chip--sun">🖍️ Colouring</span>
-                        <span class="chip chip--mint">Ages 3+</span>
-                    </div>
-                    <h3 class="game-card__title">Colour by Number</h3>
-                    <p class="game-card__desc">
-                        Follow the key — 1 is red, 2 is blue — and bring a unicorn, caterpillar,
-                        butterfly or fish to life, one numbered shape at a time.
-                    </p>
-                    <div class="game-card__skills">
-                        <span>🔢 Number spotting</span>
-                        <span>🎨 Colour names</span>
-                        <span>🧩 Matching</span>
-                    </div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--mint" href="color-by-number.html">Play now 🖍️</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="colour" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
+            <article class="land-step land-step--bad">
+                <img src="images/trail/mushroom.png" alt="">
+                <h3>Avoid obstacles</h3>
+                <p>Bumping into an obstacle costs <b>−5</b> points, so go around them.</p>
             </article>
-
-            <article class="game-card reveal" style="--reveal-delay:0.00s">
-                <div class="game-card__art game-card__art--sky">
-                    <span class="game-card__sticker">🐞</span>
-                    <span class="game-card__sticker">🐝</span>
-                    <span class="game-card__sticker">🦋</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00014__extracted.png" alt="">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta"><span class="chip chip--sky">🔢 Maths</span><span class="chip chip--mint">Ages 3+</span></div>
-                    <h3 class="game-card__title">Critter Count</h3>
-                    <p class="game-card__desc">Tap each critter to count it, then choose the right number. Up to 10, with a hint when you need one.</p>
-                    <div class="game-card__skills"><span>🔢 Counting</span><span>👆 One-to-one</span><span>🐞 Number sense</span></div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--sky" href="critter-count.html">Play now 🐞</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="count" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
+            <article class="land-step">
+                <img src="images/trail/castle.png" alt="">
+                <h3>Reach the castle</h3>
+                <p>Get home for a <b>+20</b> bonus and up to three ⭐ stars.</p>
             </article>
-
-            <article class="game-card reveal" style="--reveal-delay:0.12s">
-                <div class="game-card__art game-card__art--grape">
-                    <span class="game-card__sticker">🔴</span>
-                    <span class="game-card__sticker">🔵</span>
-                    <span class="game-card__sticker">🟡</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00009__extracted.png" alt="">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta"><span class="chip chip--grape">🧩 Logic</span><span class="chip chip--mint">Ages 4+</span></div>
-                    <h3 class="game-card__title">Pattern Parade</h3>
-                    <p class="game-card__desc">Red, blue, red, blue… what comes next? Complete the pattern and become a pattern detective.</p>
-                    <div class="game-card__skills"><span>🧩 Patterns</span><span>🔮 Predicting</span><span>👀 Observing</span></div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--primary" href="pattern-parade.html">Play now 🔴</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="pattern" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="game-card reveal" style="--reveal-delay:0.24s">
-                <div class="game-card__art game-card__art--sun">
-                    <span class="game-card__sticker">🍪</span>
-                    <span class="game-card__sticker">🍩</span>
-                    <span class="game-card__sticker">🧁</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00004__extracted.png" alt="">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta"><span class="chip chip--sun">🍪 Maths</span><span class="chip chip--mint">Ages 4+</span></div>
-                    <h3 class="game-card__title">Cookie Compare</h3>
-                    <p class="game-card__desc">Two plates, one choice: which has more? Which has fewer? Compare treats the tasty way.</p>
-                    <div class="game-card__skills"><span>⚖️ Comparing</span><span>🔢 Counting</span><span>🍪 More &amp; fewer</span></div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--candy" href="cookie-compare.html">Play now 🍪</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="compare" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="game-card reveal" style="--reveal-delay:0.00s">
-                <div class="game-card__art game-card__art--mint">
-                    <span class="game-card__sticker">🃏</span>
-                    <span class="game-card__sticker">✨</span>
-                    <span class="game-card__sticker">🧠</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00011__extracted.png" alt="">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta"><span class="chip chip--mint">🧠 Memory</span><span class="chip chip--mint">Ages 3+</span></div>
-                    <h3 class="game-card__title">Memory Match</h3>
-                    <p class="game-card__desc">Flip the cards to find matching friends. Start with 6 cards and work up to 16.</p>
-                    <div class="game-card__skills"><span>🧠 Memory</span><span>👀 Focus</span><span>🎯 Matching</span></div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--mint" href="memory-match.html">Play now 🧠</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="memory" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="game-card reveal" style="--reveal-delay:0.12s">
-                <div class="game-card__art game-card__art--sky">
-                    <span class="game-card__sticker">1️⃣</span>
-                    <span class="game-card__sticker">2️⃣</span>
-                    <span class="game-card__sticker">3️⃣</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00017__extracted.png" alt="">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta"><span class="chip chip--sky">🎈 Maths</span><span class="chip chip--mint">Ages 3+</span></div>
-                    <h3 class="game-card__title">Number Pop</h3>
-                    <p class="game-card__desc">Bubbles float by with numbers on. Pop them in order, 1, 2, 3 … all the way to 10!</p>
-                    <div class="game-card__skills"><span>🔢 Number order</span><span>👆 Tapping</span><span>🎈 Counting up</span></div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--sky" href="number-pop.html">Play now 🫧</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="pop" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="game-card reveal" style="--reveal-delay:0.12s">
-                <div class="game-card__art game-card__art--unicorn">
-                    <span class="game-card__sticker">🌈</span>
-                    <span class="game-card__sticker">🏰</span>
-                    <span class="game-card__sticker">✨</span>
-                    <img class="game-card__hero" src="images/characters/image_ComfyUI_00013__extracted.png" alt="">
-                </div>
-                <div class="game-card__body">
-                    <div class="game-card__meta"><span class="chip chip--grape">🦄 Puzzle</span><span class="chip chip--mint">Ages 4+</span></div>
-                    <h3 class="game-card__title">Unicorn Trail</h3>
-                    <p class="game-card__desc">A little unicorn is lost! Draw a rainbow path through the magical maze, dodge the cute obstacles and get it safely home.</p>
-                    <div class="game-card__skills"><span>🧭 Planning</span><span>✏️ Drawing</span><span>🧩 Problem solving</span></div>
-                    <div class="game-card__foot">
-                        <a class="btn btn--primary" href="unicorn-trail.html">Play now 🦄</a>
-                        <span class="game-card__stars">⭐ <span data-star-game="trail" data-star-word>0 stars</span></span>
-                    </div>
-                </div>
-            </article>
-
         </div>
     </section>
 
-    <!-- ── Why kids love it ─────────────────────────────────────────── -->
-    <section class="shell section">
-        <div class="section__head section__head--center reveal">
-            <span class="section__eyebrow">💗 Why little ones love it</span>
-            <h2 class="section__title">Kind by design</h2>
-            <p class="section__lede">Big buttons, soft colours and gentle feedback — nothing flashes, nobody loses.</p>
-        </div>
-
-        <div class="features">
-            <div class="feature reveal">
-                <div class="feature__icon">👆</div>
-                <h3 class="feature__title">Thumb-sized buttons</h3>
-                <p class="feature__text">Every tap target is big enough for small hands and wobbly fingers.</p>
-            </div>
-            <div class="feature reveal" style="--reveal-delay:.08s">
-                <div class="feature__icon">🫂</div>
-                <h3 class="feature__title">No fail states</h3>
-                <p class="feature__text">A wrong tap earns a hint and another go — never a buzzer and a red cross.</p>
-            </div>
-            <div class="feature reveal" style="--reveal-delay:.16s">
-                <div class="feature__icon">⭐</div>
-                <h3 class="feature__title">Stars that stay</h3>
-                <p class="feature__text">Stars are saved right on the device — no account, no email, ever.</p>
-            </div>
-            <div class="feature reveal" style="--reveal-delay:.24s">
-                <div class="feature__icon">🔇</div>
-                <h3 class="feature__title">Sound you control</h3>
-                <p class="feature__text">One tap mutes everything, for quiet cars and sleeping siblings.</p>
-            </div>
+    <section class="shell land-section">
+        <h2 class="land-h2">Choose your level</h2>
+        <div class="land-levels">
+            <a class="land-level land-level--easy" href="unicorn-trail.html?level=0"><span class="land-level__ic">🌸</span><b>Easy</b><span>5×5 meadow · 3 obstacles</span></a>
+            <a class="land-level land-level--mid" href="unicorn-trail.html?level=1"><span class="land-level__ic">🌈</span><b>Intermediate</b><span>7×7 woods · 6 obstacles</span></a>
+            <a class="land-level land-level--hard" href="unicorn-trail.html?level=2"><span class="land-level__ic">🔮</span><b>Hard</b><span>9×9 crystal maze · 11 obstacles</span></a>
         </div>
     </section>
-
-    <!-- ── Grown-ups ────────────────────────────────────────────────── -->
-    <section class="shell section" id="grown-ups">
-        <div class="panel grownups reveal">
-            <div>
-                <span class="section__eyebrow">👋 For grown-ups</span>
-                <h2 class="section__title">What your child is practising</h2>
-                <p class="section__lede">
-                    Balloon Math models each sum with objects a child can touch and count —
-                    the concrete step that comes before working with numbers on paper.
-                    Colour by Number practises number recognition, and Unicorn Makeover
-                    is free play with no right answer at all.
-                </p>
-
-                <div class="grownups__list">
-                    <div class="grownups__item">
-                        <i>1</i>
-                        <p><b>See it</b> The sum appears with the balloons that match it.</p>
-                    </div>
-                    <div class="grownups__item">
-                        <i>2</i>
-                        <p><b>Do it</b> Your child pops or counts the balloons to act the sum out.</p>
-                    </div>
-                    <div class="grownups__item">
-                        <i>3</i>
-                        <p><b>Answer it</b> They choose from three answers, with a hint if the first try misses.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="progress-card">
-                <p class="progress-card__label">Stars collected on this device</p>
-                <p class="progress-card__big" data-star-total><span class="star-count__num">0</span></p>
-                <div class="progress-card__rows">
-                    <div class="progress-card__row"><span>🎈 Balloon Math</span> <b data-star-game="balloon">0</b></div>
-                    <div class="progress-card__row"><span>🦄 Unicorn Makeover</span> <b data-star-game="unicorn">0</b></div>
-                    <div class="progress-card__row"><span>🖍️ Colour by Number</span> <b data-star-game="colour">0</b></div>
-                    <div class="progress-card__row"><span>🐞 Critter Count</span> <b data-star-game="count">0</b></div>
-                    <div class="progress-card__row"><span>🔴 Pattern Parade</span> <b data-star-game="pattern">0</b></div>
-                    <div class="progress-card__row"><span>🍪 Cookie Compare</span> <b data-star-game="compare">0</b></div>
-                    <div class="progress-card__row"><span>🧠 Memory Match</span> <b data-star-game="memory">0</b></div>
-                    <div class="progress-card__row"><span>🫧 Number Pop</span> <b data-star-game="pop">0</b></div>
-                </div>
-                <button class="btn btn--ghost btn--sm" type="button" id="resetStars">Reset stars 🧹</button>
-            </div>
-        </div>
-    </section>
-
 </main>
 
-<footer class="site-footer">
-    <div class="site-footer__links">
-        <a href="balloon-math.html">Balloon Math</a>
-        <a href="color-by-number.html">Colour by Number</a>
-        <a href="unicorn-makeover.html">Unicorn Makeover</a>
-        <a href="critter-count.html">Critter Count</a>
-        <a href="pattern-parade.html">Pattern Parade</a>
-        <a href="cookie-compare.html">Cookie Compare</a>
-        <a href="memory-match.html">Memory Match</a>
-        <a href="number-pop.html">Number Pop</a>
-        <a href="unicorn-trail.html">Unicorn Trail</a>
-        <a href="#grown-ups">For grown-ups</a>
-    </div>
-    <p>Made with 💖 for little learners · © <span data-year>2026</span> LokaKids</p>
+<footer class="land-footer">
+    <p>Made with 💖 by LokaKids · Artwork: <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener">Fluent Emoji 3D</a> by Microsoft (MIT)</p>
 </footer>
 
 <script src="js/kid.js"></script>
-<script>
-    document.getElementById('resetStars').addEventListener('click', function () {
-        if (confirm('Clear all stars collected on this device?')) {
-            Kid.Stars.reset();
-            Kid.Sound.tap();
-        }
-    });
-</script>
 </body>
 </html>

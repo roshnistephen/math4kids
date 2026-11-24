@@ -1,0 +1,5 @@
+Artwork in this folder: Fluent Emoji (3D) by Microsoft Corporation
+Source: https://github.com/microsoft/fluentui-emoji
+Licence: MIT — Copyright (c) Microsoft Corporation.
+Permission is granted, free of charge, to use, copy, modify and distribute these
+files, provided this copyright and permission notice is included in copies.
