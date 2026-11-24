@@ -117,7 +117,7 @@
     trail.innerHTML =
         '<div class="trail__hud"><span class="chipbox">🦄 Maze <b data-maze>1</b></span><span class="chipbox">✨ Sparkles <b data-spark>0/0</b></span><span class="chipbox">🏰 Home <b data-solved>0</b> reached</span></div>' +
         '<p class="trail__msg" aria-live="polite"></p>' +
-        '<div class="trail__board"><canvas tabindex="0" role="img" aria-label="Maze. Drag from the unicorn to the castle to draw a path. Arrow keys also work."></canvas></div>' +
+        '<div class="trail__board"><canvas tabindex="0" role="img" aria-label="Maze. Use the arrow keys, or drag from the unicorn to the castle, to draw a path."></canvas></div>' +
         '<div class="trail__tools">' +
         '<button class="btn btn--ghost" type="button" data-act="undo">↩️ Undo</button>' +
         '<button class="btn btn--ghost" type="button" data-act="clear">🧹 Start over</button>' +
@@ -143,7 +143,7 @@
         cfg = LEVELS[levelIdx]; L = buildLevel(cfg);
         path = [L.start]; state = 'draw'; run = null; hint = null; hinted = false; parts = []; shake = {}; faceS = L.start % L.n > L.n / 2 ? -1 : 1;
         mazeNo++; mazeEl.textContent = mazeNo;
-        say('Draw a path from the lost unicorn to the castle 🏰');
+        say('Use the arrow keys ⬆️⬇️⬅️➡️ or drag to guide the unicorn to the castle 🏰');
         resize(); refresh();
     }
 
@@ -253,9 +253,12 @@
     canvas.addEventListener('pointerup', endDrag);
     canvas.addEventListener('pointercancel', endDrag);
 
-    canvas.addEventListener('keydown', e => {
-        const map = { ArrowUp: N, ArrowRight: E, ArrowDown: S, ArrowLeft: W };
-        if (map[e.key]) { e.preventDefault(); step(neighbour(L.n, path[path.length - 1], map[e.key])); }
+    // Arrow keys work anywhere on the page (no need to click the maze first)
+    document.addEventListener('keydown', e => {
+        if (document.querySelector('.modal') || e.ctrlKey || e.metaKey || e.altKey) return;
+        const map = { ArrowUp: N, ArrowRight: E, ArrowDown: S, ArrowLeft: W, w: N, d: E, s: S, a: W };
+        const d = map[e.key];
+        if (d) { e.preventDefault(); step(neighbour(L.n, path[path.length - 1], d)); }
         else if (e.key === 'Backspace' || e.key === 'z') { e.preventDefault(); act('undo'); }
         else if (e.key === 'Escape') act('clear');
     });
@@ -462,61 +465,66 @@
         ctx.fillStyle = 'rgba(120,90,200,.18)'; ctx.beginPath(); ctx.ellipse(x, y + cs * 0.36, cs * 0.3, cs * 0.06, 0, 0, 6.283); ctx.fill();
         const by = moving ? -Math.abs(Math.sin(phase)) * 9 : hop ? -Math.abs(Math.sin((t - wonAt) * 6)) * 20 : Math.sin(t * 3) * 1.8;
         ctx.translate(x, y + cs * 0.34 + by * u); ctx.scale(u * faceS, u);
-        const outline = '#E3D3FF';
+        const outline = '#E0CCFF';
         ctx.lineJoin = 'round'; ctx.lineCap = 'round';
 
         // tail
-        const sway = Math.sin(t * (moving ? 12 : 4)) * (moving ? 10 : 5);
-        PASTELS.slice(0, 5).forEach((col, i) => {
-            ctx.strokeStyle = col; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(-32, -34);
-            ctx.bezierCurveTo(-56, -44 - i * 4 + sway, -66 + i * 3, -14 - i * 3 + sway, -52 + i * 2, 0 - i * 3);
+        const sway = Math.sin(t * (moving ? 12 : 4)) * (moving ? 9 : 4);
+        [0, 1, 2, 3, 4].forEach(i => {
+            ctx.strokeStyle = PASTELS[i]; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(-28, -42);
+            ctx.bezierCurveTo(-48, -62 + i * 3 + sway, -62 + i * 2, -38 + i * 4 + sway, -50 + i * 2, -14 + i * 4);
             ctx.stroke();
         });
 
-        const leg = (lx, ang, back) => {
+        const leg = (lx, ang) => {
             ctx.save(); ctx.translate(lx, -20); ctx.rotate(ang);
-            ctx.fillStyle = '#fff'; ctx.strokeStyle = outline; ctx.lineWidth = 2; rr(-5, 0, 10, 26, 5); ctx.fill(); ctx.stroke();
-            ctx.fillStyle = back ? '#FFC94D' : '#FFB627'; rr(-5, 21, 10, 7, 3); ctx.fill();
+            ctx.fillStyle = '#fff'; ctx.strokeStyle = outline; ctx.lineWidth = 2; rr(-6, 0, 12, 20, 6); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#FFC94D'; rr(-6, 14, 12, 6, 3); ctx.fill();
             ctx.restore();
         };
-        const sw = moving ? 0.75 : 0;
-        leg(-22, Math.sin(phase + Math.PI) * sw, true); leg(-8, Math.sin(phase) * sw, true);
+        const sw = moving ? 0.8 : 0;
+        leg(-20, Math.sin(phase + Math.PI) * sw); leg(-6, Math.sin(phase) * sw);
 
         // body
-        const bg = ctx.createLinearGradient(0, -52, 0, -6); bg.addColorStop(0, '#FFFFFF'); bg.addColorStop(1, '#FFE3F1');
+        const bg = ctx.createLinearGradient(0, -58, 0, -10); bg.addColorStop(0, '#FFFFFF'); bg.addColorStop(1, '#FFE0F0');
         ctx.fillStyle = bg; ctx.strokeStyle = outline; ctx.lineWidth = 2.5;
-        ctx.beginPath(); ctx.ellipse(0, -32, 38, 23, 0, 0, 6.283); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(0, -34, 35, 24, 0, 0, 6.283); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = 'rgba(255,170,210,.35)'; ctx.beginPath(); ctx.arc(-14, -34, 7, 0, 6.283); ctx.fill();
 
-        leg(14, Math.sin(phase + Math.PI * 0.5) * sw, false); leg(28, Math.sin(phase + Math.PI * 1.5) * sw, false);
+        leg(12, Math.sin(phase + Math.PI * 0.5) * sw); leg(26, Math.sin(phase + Math.PI * 1.5) * sw);
 
-        // mane
-        [[20, -76], [14, -64], [11, -52], [12, -40], [16, -30]].forEach(([mx, my], i) => {
-            ctx.fillStyle = PASTELS[i]; ctx.beginPath(); ctx.arc(mx + Math.sin(t * 5 + i) * (moving ? 3 : 1), my, 9, 0, 6.283); ctx.fill();
+        // mane peeking out behind the head
+        [[8, -86], [2, -74], [0, -62], [3, -50], [9, -40]].forEach(([mx, my], i) => {
+            ctx.fillStyle = PASTELS[i]; ctx.beginPath(); ctx.arc(mx + Math.sin(t * 5 + i) * (moving ? 3 : 1), my, 10, 0, 6.283); ctx.fill();
         });
 
-        // neck + head
+        // ear (behind head)
         ctx.fillStyle = '#fff'; ctx.strokeStyle = outline; ctx.lineWidth = 2.5;
-        ctx.save(); ctx.translate(27, -52); ctx.rotate(0.4); ctx.beginPath(); ctx.ellipse(0, 0, 14, 27, 0, 0, 6.283); ctx.fill(); ctx.restore();
-        ctx.beginPath(); ctx.arc(37, -76, 19, 0, 6.283); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = '#FFD3E6'; ctx.beginPath(); ctx.ellipse(50, -70, 11, 9, 0, 0, 6.283); ctx.fill();
-        ctx.fillStyle = '#E58BB4'; ctx.beginPath(); ctx.arc(53, -72, 1.8, 0, 6.283); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(12, -78); ctx.lineTo(13, -100); ctx.lineTo(27, -85); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#FFB5D5'; ctx.beginPath(); ctx.moveTo(16, -82); ctx.lineTo(16, -94); ctx.lineTo(23, -86); ctx.closePath(); ctx.fill();
 
-        // ear + horn
-        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(25, -88); ctx.lineTo(27, -102); ctx.lineTo(36, -92); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = '#FFB5D5'; ctx.beginPath(); ctx.moveTo(28, -91); ctx.lineTo(29, -98); ctx.lineTo(33, -93); ctx.closePath(); ctx.fill();
-        const hg = ctx.createLinearGradient(40, -92, 52, -124); hg.addColorStop(0, '#FFE27A'); hg.addColorStop(1, '#FFB627');
+        // head + snout
+        ctx.fillStyle = '#fff'; ctx.strokeStyle = outline; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.arc(30, -62, 23, 0, 6.283); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#FFD3E6'; ctx.beginPath(); ctx.ellipse(46, -54, 10, 8, 0, 0, 6.283); ctx.fill();
+        ctx.fillStyle = '#E58BB4'; ctx.beginPath(); ctx.arc(49, -56, 1.8, 0, 6.283); ctx.fill();
+
+        // horn
+        const hg = ctx.createLinearGradient(34, -84, 46, -118); hg.addColorStop(0, '#FFE27A'); hg.addColorStop(1, '#FFB627');
         ctx.fillStyle = hg; ctx.strokeStyle = '#F2A21A'; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(38, -91); ctx.lineTo(50, -89); ctx.lineTo(49, -124); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(40, -98); ctx.lineTo(49, -101); ctx.moveTo(41, -106); ctx.lineTo(49, -110); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(29, -83); ctx.lineTo(42, -80); ctx.lineTo(41, -118); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(32, -93); ctx.lineTo(41, -97); ctx.moveTo(34, -103); ctx.lineTo(41, -107); ctx.stroke();
 
-        // forelock, eye, blush, smile
-        ctx.fillStyle = '#FF9EC4'; ctx.beginPath(); ctx.arc(32, -93, 7, 0, 6.283); ctx.fill();
-        ctx.fillStyle = '#FFE680'; ctx.beginPath(); ctx.arc(25, -88, 6, 0, 6.283); ctx.fill();
+        // forelock
+        ctx.fillStyle = '#FF9EC4'; ctx.beginPath(); ctx.arc(22, -82, 8, 0, 6.283); ctx.fill();
+        ctx.fillStyle = '#FFE680'; ctx.beginPath(); ctx.arc(15, -76, 6, 0, 6.283); ctx.fill();
+
+        // face
         const blink = (t % 3.2) > 3.05 ? 0.15 : 1;
-        ctx.fillStyle = '#3B2B6B'; ctx.beginPath(); ctx.ellipse(42, -79, 3.6, 4.6 * blink, 0, 0, 6.283); ctx.fill();
-        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(43.2, -80.6, 1.3, 0, 6.283); ctx.fill();
-        ctx.fillStyle = 'rgba(255,130,175,.55)'; ctx.beginPath(); ctx.ellipse(38, -68, 5, 3.4, 0, 0, 6.283); ctx.fill();
-        ctx.strokeStyle = '#B5679A'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(48, -66, 4, 0.2, 1.9); ctx.stroke();
+        ctx.fillStyle = '#3B2B6B'; ctx.beginPath(); ctx.ellipse(37, -64, 4.2, 5.4 * blink, 0, 0, 6.283); ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(38.4, -66, 1.6, 0, 6.283); ctx.fill();
+        ctx.fillStyle = 'rgba(255,130,175,.6)'; ctx.beginPath(); ctx.ellipse(33, -50, 5.5, 3.6, 0, 0, 6.283); ctx.fill();
+        ctx.strokeStyle = '#B5679A'; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(45, -50, 4, 0.3, 1.9); ctx.stroke();
         ctx.restore();
     }
 
