@@ -86,3 +86,23 @@
     .land-step p { font-size: .8rem; }
 }
 @media (orientation: landscape) and (max-height: 560px) { .land-hero { padding-top: 16px; } .land-stage { max-width: 260px; } }
+
+/* Two-game home page */
+.land-stage__unicorn { width: 62%; left: 6%; top: 18%; }
+.land-stage__bella { position: absolute; width: 40%; right: 4%; top: 4%; transform: scaleX(-1); filter: hue-rotate(290deg) saturate(1.5) brightness(1.05) drop-shadow(0 14px 18px rgba(90,60,160,.25)); animation: lFloat 5s ease-in-out infinite .5s; }
+.land-stage__castle { width: 34%; right: 2%; bottom: 4%; }
+.land-stage__cloud { width: 38%; left: 0; bottom: 6%; animation: lFloat 7s ease-in-out infinite 1s; }
+.land-games { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.land-game { display: flex; align-items: center; gap: 16px; padding: 18px; border-radius: var(--r-lg); background: rgba(255,255,255,.9); box-shadow: var(--shadow-m), inset 0 0 0 3px rgba(255,255,255,.9); transition: transform .2s var(--ease-bounce), box-shadow .2s; }
+.land-game:hover { transform: translateY(-4px); box-shadow: var(--shadow-l); }
+.land-game:active { transform: scale(.98); }
+.land-game__art { position: relative; flex: none; width: 104px; height: 104px; border-radius: 28px; background: linear-gradient(150deg, #E3D6FF, #FFD3E7); display: grid; place-items: center; }
+.land-game--rk .land-game__art { background: linear-gradient(160deg, #8FD3FF, #FFD6EC); }
+.land-game--trail .land-game__art { background: linear-gradient(150deg, #FFE3F1, #E3D6FF); }
+.land-game__art img:first-child { width: 78px; filter: drop-shadow(0 6px 8px rgba(90,60,160,.3)); }
+.land-game__art img:last-child { position: absolute; width: 38px; right: -6px; bottom: -6px; filter: drop-shadow(0 4px 6px rgba(90,60,160,.3)); }
+.land-game__body { display: grid; gap: 4px; }
+.land-game__body b { font: 600 1.3rem 'Fredoka', sans-serif; }
+.land-game__body span { font-size: .88rem; font-weight: 700; color: var(--ink-soft); }
+.land-game__body em { font-style: normal; font: 600 1rem 'Fredoka', sans-serif; color: var(--grape-deep); }
+@media (max-width: 700px) { .land-games { grid-template-columns: 1fr; } .land-game__art { width: 88px; height: 88px; } }

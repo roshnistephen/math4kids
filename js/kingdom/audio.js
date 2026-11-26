@@ -1,0 +1,139 @@
+/* Rainbow Kingdom — original music box lullabies and sound effects, made live with the Web Audio API. */
+(function () {
+    'use strict';
+    const RK = window.RK = window.RK || {};
+    const KEY = 'lokakids.kingdom.audio';
+    const state = { music: true, sfx: true };
+    try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { /* ignore */ }
+    const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } };
+
+    /* One theme per mood. chords are semitone offsets from root; scale is the melody pool. */
+    const THEMES = {
+        title:  { bpm: 78,  root: 60, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [9, 12, 16], [5, 9, 12], [7, 11, 14]], seed: 11, bass: true },
+        dawn:   { bpm: 92,  root: 60, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [7, 11, 14], [9, 12, 16], [5, 9, 12]], seed: 23, bass: true },
+        forest: { bpm: 84,  root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 37, bass: true },
+        canyon: { bpm: 96,  root: 62, scale: [0, 2, 4, 6, 9],  chords: [[0, 4, 7], [2, 6, 9], [9, 12, 16], [4, 7, 11]], seed: 41, bass: true },
+        bubble: { bpm: 88,  root: 63, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [0, 4, 7]], seed: 53, bass: true },
+        home:   { bpm: 108, root: 67, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [7, 11, 14], [9, 12, 16], [5, 9, 12]], seed: 67, bass: true, bright: true }
+    };
+
+    let ctx = null, master, musicBus, sfxBus, reverb, wet, dry, cur = null;
+    const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+    const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+    function impulse(sec, decay) {
+        const n = Math.floor(ctx.sampleRate * sec), b = ctx.createBuffer(2, n, ctx.sampleRate);
+        for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, decay); }
+        return b;
+    }
+
+    function ensure() {
+        if (ctx) { if (ctx.state === 'suspended') ctx.resume().catch(() => {}); return ctx; }
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        try { ctx = new AC(); } catch (e) { return null; }
+        master = ctx.createGain(); master.gain.value = 0.9; master.connect(ctx.destination);
+        musicBus = ctx.createGain(); musicBus.gain.value = state.music ? 0.55 : 0;
+        sfxBus = ctx.createGain(); sfxBus.gain.value = state.sfx ? 0.9 : 0;
+        reverb = ctx.createConvolver(); reverb.buffer = impulse(2.4, 2.4);
+        wet = ctx.createGain(); wet.gain.value = 0.34; dry = ctx.createGain(); dry.gain.value = 0.85;
+        musicBus.connect(dry); musicBus.connect(reverb); reverb.connect(wet);
+        sfxBus.connect(dry); sfxBus.connect(reverb);
+        dry.connect(master); wet.connect(master);
+        return ctx;
+    }
+
+    /* A single enveloped oscillator. */
+    function note(dest, freq, t, dur, o) {
+        o = o || {};
+        const osc = ctx.createOscillator(), g = ctx.createGain();
+        osc.type = o.type || 'sine'; osc.frequency.setValueAtTime(freq, t);
+        if (o.slideTo) osc.frequency.exponentialRampToValueAtTime(o.slideTo, t + dur);
+        const a = o.attack || 0.008, v = o.vol || 0.15;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(v, t + a);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        let out = osc;
+        if (o.lp) { const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = o.lp; osc.connect(f); out = f; }
+        out.connect(g); g.connect(dest);
+        osc.start(t); osc.stop(t + dur + 0.05);
+    }
+    const bell = (dest, freq, t, vol, len) => {          // music-box tone: fundamental + soft overtones
+        note(dest, freq, t, len || 1.5, { vol: vol, attack: 0.004 });
+        note(dest, freq * 2, t, (len || 1.5) * 0.45, { vol: vol * 0.28, attack: 0.004 });
+        note(dest, freq * 3.01, t, 0.25, { vol: vol * 0.1, attack: 0.002 });
+    };
+
+    function stopCurrent(fade) {
+        if (!cur) return;
+        const c = cur; cur = null;
+        clearInterval(c.timer);
+        try { c.out.gain.cancelScheduledValues(ctx.currentTime); c.out.gain.setValueAtTime(c.out.gain.value, ctx.currentTime); c.out.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + (fade || 0.8)); } catch (e) { /* ignore */ }
+        setTimeout(() => { try { c.out.disconnect(); } catch (e) { /* ignore */ } }, ((fade || 0.8) + 0.3) * 1000);
+    }
+
+    function play(name) {
+        const th = THEMES[name] || THEMES.title;
+        if (!ensure()) return;
+        if (cur && cur.name === name) return;
+        stopCurrent(1);
+        const out = ctx.createGain(); out.gain.setValueAtTime(0.0001, ctx.currentTime); out.gain.linearRampToValueAtTime(1, ctx.currentTime + 1.4); out.connect(musicBus);
+        const rand = rng(th.seed), step = 60 / th.bpm / 2, bar = 8;
+        // Compose a 4-bar melody once so the tune is memorable on every loop
+        const melody = []; let idx = 2;
+        for (let b = 0; b < 4; b++) for (let s = 0; s < bar; s++) {
+            if (s === 0) { const ch = th.chords[b]; idx = th.scale.findIndex(x => (x % 12 + 12) % 12 === (ch[1] % 12 + 12) % 12); if (idx < 0) idx = 2; melody.push(idx + 5); continue; }
+            if (rand() < 0.28 && s % 2) { melody.push(null); continue; }
+            idx = Math.max(0, Math.min(th.scale.length * 2 - 1, idx + [-2, -1, -1, 1, 1, 2][Math.floor(rand() * 6)]));
+            melody.push(idx + 5);
+        }
+        const c = cur = { name, out, n: 0, next: ctx.currentTime + 0.15, timer: 0 };
+        const sched = () => {
+            if (cur !== c) return;
+            while (c.next < ctx.currentTime + 0.3) {
+                const t = c.next, n = c.n, b = Math.floor(n / bar) % 4, s = n % bar, ch = th.chords[b];
+                if (s === 0) {   // pad + bass at the start of each bar
+                    ch.forEach(semi => note(out, mtof(th.root + semi - 12), t, step * bar * 1.05, { type: 'triangle', vol: 0.055, attack: 0.5, lp: 900 }));
+                    if (th.bass) note(out, mtof(th.root + ch[0] - 24), t, step * 4, { vol: 0.12, attack: 0.03 });
+                }
+                if (th.bass && s === 4) note(out, mtof(th.root + ch[0] - 24), t, step * 3, { vol: 0.09, attack: 0.03 });
+                const m = melody[b * bar + s];
+                if (m !== null && m !== undefined) {
+                    const deg = th.scale[m % th.scale.length] + 12 * Math.floor(m / th.scale.length);
+                    bell(out, mtof(th.root + deg), t, s % 4 === 0 ? 0.16 : 0.11, 1.6);
+                }
+                if (s === 6 && rand() < 0.5) bell(out, mtof(th.root + th.scale[Math.floor(rand() * 5)] + 24), t + step * 0.5, 0.045, 1.2);   // twinkle
+                if (th.bright && s % 2 === 0) note(out, mtof(th.root + ch[2] + 12), t, step * 0.9, { type: 'triangle', vol: 0.025, attack: 0.01, lp: 3000 });
+                c.next += step; c.n++;
+            }
+        };
+        sched(); c.timer = setInterval(sched, 90);
+    }
+
+    /* Short sound effects */
+    const SFX = {
+        click(t) { note(sfxBus, 880, t, 0.08, { vol: 0.07, type: 'triangle' }); },
+        star(t, o) { const k = Math.min(7, (o && o.combo) || 0), base = 880 * Math.pow(2, [0, 2, 4, 5, 7, 9, 11, 12][k] / 12); note(sfxBus, base, t, 0.18, { vol: 0.13, type: 'sine' }); note(sfxBus, base * 1.5, t + 0.07, 0.3, { vol: 0.1, type: 'sine' }); },
+        ring(t) { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => bell(sfxBus, f, t + i * 0.07, 0.13, 1.2)); },
+        hit(t) { note(sfxBus, 340, t, 0.32, { vol: 0.2, type: 'triangle', slideTo: 90 }); note(sfxBus, 170, t, 0.25, { vol: 0.12, type: 'sine', slideTo: 70 }); },
+        magic(t) { note(sfxBus, 330, t, 0.7, { vol: 0.14, type: 'triangle', slideTo: 1760 }); [1047, 1319, 1568, 2093].forEach((f, i) => bell(sfxBus, f, t + 0.1 + i * 0.08, 0.1, 1)); },
+        ready(t) { note(sfxBus, 660, t, 0.18, { vol: 0.12, type: 'triangle' }); },
+        go(t) { note(sfxBus, 988, t, 0.45, { vol: 0.14, type: 'triangle' }); note(sfxBus, 1319, t + 0.08, 0.5, { vol: 0.1 }); },
+        win(t) { [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.12, 0.16, 1.8)); },
+        found(t) { [784, 988, 1175, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.1, 0.15, 1.6)); },
+        lose(t) { [523, 440, 349].forEach((f, i) => bell(sfxBus, f, t + i * 0.16, 0.11, 1.2)); },
+        whoosh(t) { note(sfxBus, 220, t, 0.4, { vol: 0.05, type: 'sawtooth', slideTo: 900, lp: 1200 }); }
+    };
+
+    RK.Audio = {
+        state,
+        unlock() { ensure(); },
+        play,
+        stop(f) { if (ctx) stopCurrent(f); },
+        sfx(name, o) { if (!state.sfx || !ensure() || !SFX[name]) return; SFX[name](ctx.currentTime + 0.01, o); },
+        setMusic(on) { state.music = !!on; persist(); if (ctx) musicBus.gain.setTargetAtTime(on ? 0.55 : 0, ctx.currentTime, 0.1); },
+        setSfx(on) { state.sfx = !!on; persist(); if (ctx) sfxBus.gain.setTargetAtTime(on ? 0.9 : 0, ctx.currentTime, 0.05); },
+        pause() { if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); },
+        resume() { if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {}); }
+    };
+})();

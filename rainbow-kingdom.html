@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#BFE4FF">
+<title>Rainbow Kingdom — Luna's Magical Quest</title>
+<meta name="description" content="Fly Luna the unicorn over fluffy clouds and through the magical forest to find her missing friend Bella and bring her home to Rainbow Castle. A cute 3D flying adventure with 5 levels.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Rainbow Kingdom">
+<link rel="icon" href="images/kingdom/luna.png">
+<link rel="apple-touch-icon" href="images/kingdom/luna.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/kingdom.css">
+</head>
+<body class="rk" data-screen="loading">
+
+<div id="sky"></div>
+<div id="stage" aria-label="3D game view"></div>
+
+<!-- Loading and fallback -->
+<div id="loading" class="loading"><img src="images/kingdom/luna.png" alt=""><p>Rainbow Kingdom</p><div class="loading__bar"><i></i></div></div>
+<div id="nogl" class="scr scr--center" hidden>
+    <div class="card">
+        <img class="card__img" src="images/kingdom/cloud.png" alt="">
+        <h2>Oh no! 3D isn't available</h2>
+        <p>This browser can't show the 3D world. Please try the latest Chrome, Safari, Edge or Firefox.</p>
+        <a class="btn-big" href="index.html">Back home</a>
+    </div>
+</div>
+
+<!-- In-game HUD -->
+<div id="hud" class="hud" hidden>
+    <div class="hud__top">
+        <button id="h-pause" class="ibtn" type="button" aria-label="Pause"><img src="images/kingdom/pause.png" alt=""></button>
+        <div class="chip chip--level" id="h-level"></div>
+        <span class="hud__sp"></span>
+        <div class="chip" id="h-starchip" title="Stars collected"><img src="images/kingdom/star.png" alt=""><b id="h-stars">0/0</b></div>
+        <div class="hearts" id="h-hearts" aria-label="Hearts"><i></i><i></i><i></i></div>
+    </div>
+    <div class="prog" aria-hidden="true">
+        <div class="prog__track"><div class="prog__fill" id="h-fill"></div><img class="prog__luna" id="h-luna" src="images/kingdom/luna.png" alt=""></div>
+        <img class="prog__goal" id="h-goal" src="images/kingdom/ribbon.png" alt="">
+    </div>
+    <div class="hud__bottom">
+        <p id="hint" class="hint">👆 Drag to fly Luna · fly through the glowing rings</p>
+        <button id="magic" class="magic" type="button" aria-label="Rainbow dash magic"><img src="images/kingdom/wand.png" alt=""><span>Magic</span></button>
+    </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="count" class="count" hidden></div>
+
+<!-- Title -->
+<section class="scr scr--title" id="scr-title" hidden>
+    <div class="scr__top">
+        <a class="ibtn" href="index.html" aria-label="Back to home">🏠</a>
+        <span class="hud__sp"></span>
+        <button class="ibtn" type="button" data-toggle="music" aria-label="Music"><img src="images/kingdom/note.png" alt=""></button>
+        <button class="ibtn" type="button" data-toggle="sfx" aria-label="Sound effects">🔊</button>
+    </div>
+    <div class="title">
+        <img class="title__crown" src="images/kingdom/crown.png" alt="">
+        <h1 class="logo"><span>Rainbow</span><b>Kingdom</b></h1>
+        <p class="title__sub">Luna's Magical Quest</p>
+        <p class="title__story">Bella is missing! Fly Luna through the clouds and the magic forest, follow the glowing path, and bring her home to Rainbow Castle.</p>
+        <button id="btn-play" class="btn-big" type="button" data-act="play">Play ▶</button>
+        <button class="btn-sub" type="button" data-act="levels">🗺️ Choose a level</button>
+    </div>
+</section>
+
+<!-- Level select -->
+<section class="scr scr--solid" id="scr-levels" hidden>
+    <div class="scr__top">
+        <button class="ibtn" type="button" data-act="title" aria-label="Back">◀</button>
+        <h2 class="scr__h">Choose a level</h2>
+        <span class="hud__sp"></span>
+    </div>
+    <div class="levels" id="levels-grid"></div>
+</section>
+
+<!-- Level intro / story -->
+<section class="scr scr--center" id="scr-intro" hidden>
+    <div class="card card--story">
+        <span class="pill" id="intro-num">Level 1</span>
+        <h2 id="intro-title">Cloud Meadows</h2>
+        <p class="card__story" id="intro-story"></p>
+        <ol class="quest" id="quest" aria-label="Quest progress"></ol>
+        <p class="card__tip" id="intro-tip"></p>
+        <button class="btn-big" type="button" data-act="start">Let's fly! ▶</button>
+        <button class="btn-sub" type="button" data-act="levels">◀ Levels</button>
+    </div>
+</section>
+
+<!-- Level complete -->
+<section class="scr scr--center" id="scr-result" hidden>
+    <div class="card">
+        <img class="card__img float" id="res-img" src="images/kingdom/ribbon.png" alt="">
+        <h2 id="res-title">Level complete!</h2>
+        <div class="starsrow" id="res-stars"></div>
+        <p class="card__story" id="res-found"></p>
+        <div class="stats" id="res-stats"></div>
+        <button class="btn-big" id="btn-next" type="button" data-act="next">Next level ▶</button>
+        <div class="row"><button class="btn-sub" type="button" data-act="replay">🔁 Replay</button><button class="btn-sub" type="button" data-act="levels">🗺️ Levels</button></div>
+    </div>
+</section>
+
+<!-- Pause -->
+<section class="scr scr--center" id="scr-pause" hidden>
+    <div class="card card--small">
+        <h2>Paused</h2>
+        <button class="btn-big" type="button" data-act="resume">Resume ▶</button>
+        <div class="row"><button class="btn-sub" type="button" data-act="restart">🔁 Restart</button><button class="btn-sub" type="button" data-act="levels">🗺️ Levels</button></div>
+        <div class="row row--tg"><button class="ibtn" type="button" data-toggle="music" aria-label="Music"><img src="images/kingdom/note.png" alt=""></button><button class="ibtn" type="button" data-toggle="sfx" aria-label="Sound effects">🔊</button></div>
+    </div>
+</section>
+
+<!-- Out of hearts: friendly, never a hard fail -->
+<section class="scr scr--center" id="scr-over" hidden>
+    <div class="card card--small">
+        <img class="card__img float" src="images/kingdom/heart.png" alt="">
+        <h2>Luna needs a rest</h2>
+        <p class="card__story">That was a bumpy flight! Luna can keep going from the last ring with fresh hearts.</p>
+        <button class="btn-big" type="button" data-act="keep">Keep flying 💖</button>
+        <button class="btn-sub" type="button" data-act="restart">🔁 Start level again</button>
+    </div>
+</section>
+
+<!-- The happy ending -->
+<section class="scr scr--center scr--end" id="scr-end" hidden>
+    <div class="card">
+        <div class="end__duo"><img src="images/kingdom/luna.png" alt="Luna"><img class="bella" src="images/kingdom/luna.png" alt="Bella"></div>
+        <h2>Welcome home!</h2>
+        <div class="starsrow" id="end-stars"></div>
+        <p class="card__story">Luna and Bella are back in Rainbow Castle, safe and sound. The whole kingdom is cheering — you're a true hero! 🌈</p>
+        <p class="card__tip" id="end-total"></p>
+        <button class="btn-big" type="button" data-act="again">Play again ▶</button>
+        <button class="btn-sub" type="button" data-act="levels">🗺️ Choose a level</button>
+        <a class="btn-sub" href="index.html">🏠 Home</a>
+    </div>
+</section>
+
+<script src="js/kid.js"></script>
+<script src="js/vendor/three.min.js"></script>
+<script src="js/kingdom/audio.js"></script>
+<script src="js/kingdom/models.js"></script>
+<script src="js/kingdom/levels.js"></script>
+<script src="js/kingdom/game.js"></script>
+</body>
+</html>
