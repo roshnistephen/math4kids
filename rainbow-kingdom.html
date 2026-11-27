@@ -21,6 +21,9 @@
 
 <div id="sky"></div>
 <div id="stage" aria-label="3D game view"></div>
+<div id="fx" aria-hidden="true"></div>
+<div class="bars" aria-hidden="true"><i></i><i></i></div>
+<div id="cine" class="cine" role="status" aria-live="polite"></div>
 
 <!-- Loading and fallback -->
 <div id="loading" class="loading"><img src="images/kingdom/luna.png" alt=""><p>Rainbow Kingdom</p><div class="loading__bar"><i></i></div></div>
@@ -39,18 +42,24 @@
         <button id="h-pause" class="ibtn" type="button" aria-label="Pause"><img src="images/kingdom/pause.png" alt=""></button>
         <div class="chip chip--level" id="h-level"></div>
         <span class="hud__sp"></span>
+        <div class="chip chip--bella" id="h-bella" hidden>💗 Bella <b>0</b> m</div>
         <div class="chip" id="h-starchip" title="Stars collected"><img src="images/kingdom/star.png" alt=""><b id="h-stars">0/0</b></div>
         <div class="hearts" id="h-hearts" aria-label="Hearts"><i></i><i></i><i></i></div>
     </div>
-    <div class="prog" aria-hidden="true">
-        <div class="prog__track"><div class="prog__fill" id="h-fill"></div><img class="prog__luna" id="h-luna" src="images/kingdom/luna.png" alt=""></div>
-        <img class="prog__goal" id="h-goal" src="images/kingdom/ribbon.png" alt="">
-    </div>
     <div class="hud__bottom">
-        <p id="hint" class="hint">👆 Drag to fly Luna · fly through the glowing rings</p>
+        <p id="hint" class="hint">👆 Touch and hold to fly · drag to steer</p>
         <button id="magic" class="magic" type="button" aria-label="Rainbow dash magic"><img src="images/kingdom/wand.png" alt=""><span>Magic</span></button>
     </div>
 </div>
+<section id="bond" class="bond" hidden>
+    <p class="bond__q">Spend some time with Bella!</p>
+    <div class="bond__row">
+        <button type="button" data-bond="hug"><i>🤗</i><span>Hug</span></button>
+        <button type="button" data-bond="play"><i>🌀</i><span>Play</span></button>
+        <button type="button" data-bond="sparkle"><i>✨</i><span>Sparkle</span></button>
+    </div>
+    <button id="bond-next" class="btn-big" type="button" data-act="bonddone" hidden>Fly home together ▶</button>
+</section>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="count" class="count" hidden></div>
 
@@ -59,6 +68,7 @@
     <div class="scr__top">
         <a class="ibtn" href="index.html" aria-label="Back to home">🏠</a>
         <span class="hud__sp"></span>
+        <button class="ibtn" type="button" data-toggle="voice" aria-label="Narrator voice">🗣️</button>
         <button class="ibtn" type="button" data-toggle="music" aria-label="Music"><img src="images/kingdom/note.png" alt=""></button>
         <button class="ibtn" type="button" data-toggle="sfx" aria-label="Sound effects">🔊</button>
     </div>
@@ -66,7 +76,7 @@
         <img class="title__crown" src="images/kingdom/crown.png" alt="">
         <h1 class="logo"><span>Rainbow</span><b>Kingdom</b></h1>
         <p class="title__sub">Luna's Magical Quest</p>
-        <p class="title__story">Bella is missing! Fly Luna through the clouds and the magic forest, follow the glowing path, and bring her home to Rainbow Castle.</p>
+        <p class="title__story">Bella is missing! Fly Luna through the clouds, the magic forest and Candy Land, follow the glowing path, and bring her home to Rainbow Castle.</p>
         <button id="btn-play" class="btn-big" type="button" data-act="play">Play ▶</button>
         <button class="btn-sub" type="button" data-act="levels">🗺️ Choose a level</button>
     </div>
@@ -114,7 +124,7 @@
         <h2>Paused</h2>
         <button class="btn-big" type="button" data-act="resume">Resume ▶</button>
         <div class="row"><button class="btn-sub" type="button" data-act="restart">🔁 Restart</button><button class="btn-sub" type="button" data-act="levels">🗺️ Levels</button></div>
-        <div class="row row--tg"><button class="ibtn" type="button" data-toggle="music" aria-label="Music"><img src="images/kingdom/note.png" alt=""></button><button class="ibtn" type="button" data-toggle="sfx" aria-label="Sound effects">🔊</button></div>
+        <div class="row row--tg"><button class="ibtn" type="button" data-toggle="voice" aria-label="Narrator voice">🗣️</button><button class="ibtn" type="button" data-toggle="music" aria-label="Music"><img src="images/kingdom/note.png" alt=""></button><button class="ibtn" type="button" data-toggle="sfx" aria-label="Sound effects">🔊</button></div>
     </div>
 </section>
 
@@ -147,6 +157,7 @@
 <script src="js/vendor/three.min.js"></script>
 <script src="js/kingdom/audio.js"></script>
 <script src="js/kingdom/models.js"></script>
+<script src="js/kingdom/env.js"></script>
 <script src="js/kingdom/levels.js"></script>
 <script src="js/kingdom/game.js"></script>
 </body>

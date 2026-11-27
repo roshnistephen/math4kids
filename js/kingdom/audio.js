@@ -3,7 +3,7 @@
     'use strict';
     const RK = window.RK = window.RK || {};
     const KEY = 'lokakids.kingdom.audio';
-    const state = { music: true, sfx: true };
+    const state = { music: true, sfx: true, voice: true };
     try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { /* ignore */ }
     const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } };
 
@@ -14,6 +14,7 @@
         forest: { bpm: 84,  root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 37, bass: true },
         canyon: { bpm: 96,  root: 62, scale: [0, 2, 4, 6, 9],  chords: [[0, 4, 7], [2, 6, 9], [9, 12, 16], [4, 7, 11]], seed: 41, bass: true },
         bubble: { bpm: 88,  root: 63, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [0, 4, 7]], seed: 53, bass: true },
+        candy:  { bpm: 104, root: 65, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [9, 12, 16]], seed: 79, bass: true, bright: true },
         home:   { bpm: 108, root: 67, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [7, 11, 14], [9, 12, 16], [5, 9, 12]], seed: 67, bass: true, bright: true }
     };
 
@@ -125,6 +126,38 @@
         whoosh(t) { note(sfxBus, 220, t, 0.4, { vol: 0.05, type: 'sawtooth', slideTo: 900, lp: 1200 }); }
     };
 
+    /* Narrator: the browser's own text-to-speech, with a distinct pitch for each character. The music dips while someone is talking. */
+    const synth = window.speechSynthesis, Voice = { queueId: 0 };
+    let voices = [], picked = null;
+    function loadVoices() {
+        if (!synth) return;
+        voices = synth.getVoices() || [];
+        const en = voices.filter(v => /^en/i.test(v.lang));
+        const pref = [/samantha|karen|moira|tessa|serena|fiona|google uk english female|google us english|microsoft (aria|jenny|zira)|female/i];
+        picked = en.find(v => pref[0].test(v.name)) || en.find(v => /en-(us|gb|au|in)/i.test(v.lang)) || en[0] || null;
+    }
+    if (synth) { loadVoices(); try { synth.addEventListener('voiceschanged', loadVoices); } catch (e) { synth.onvoiceschanged = loadVoices; } }
+    const CHARS = { narrator: { pitch: 1.12, rate: 0.93 }, luna: { pitch: 1.4, rate: 1.0 }, bella: { pitch: 1.7, rate: 1.06 } };
+    const clean = t => String(t).replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').replace(/\s+/g, ' ').replace(/…/g, '...').trim();
+    function duck(on) { if (ctx && musicBus) musicBus.gain.setTargetAtTime(on ? (state.music ? 0.16 : 0) : (state.music ? 0.55 : 0), ctx.currentTime, 0.15); }
+    Voice.available = () => !!synth && typeof SpeechSynthesisUtterance !== 'undefined';
+    Voice.on = () => Voice.available() && state.voice;
+    Voice.stop = () => { if (!synth) return; Voice.queueId++; try { synth.cancel(); } catch (e) { /* ignore */ } duck(false); };
+    Voice.speak = (text, who) => {
+        if (!Voice.on()) return false;
+        const id = ++Voice.queueId, c = CHARS[who] || CHARS.narrator;
+        try { synth.cancel(); } catch (e) { /* ignore */ }
+        const txt = clean(text), parts = (txt.match(/[^.!?]+[.!?]*/g) || [txt]).map(x => x.trim()).filter(Boolean);
+        parts.forEach((part, i) => {
+            const u = new SpeechSynthesisUtterance(part); u.pitch = c.pitch; u.rate = c.rate; u.volume = 1; if (picked) { u.voice = picked; u.lang = picked.lang; } else u.lang = 'en-US';
+            if (i === 0) u.onstart = () => { if (id === Voice.queueId) duck(true); };
+            if (i === parts.length - 1) { u.onend = () => { if (id === Voice.queueId) duck(false); }; u.onerror = () => duck(false); }
+            synth.speak(u);
+        });
+        return true;
+    };
+
+    RK.Voice = Voice;
     RK.Audio = {
         state,
         unlock() { ensure(); },
@@ -132,8 +165,9 @@
         stop(f) { if (ctx) stopCurrent(f); },
         sfx(name, o) { if (!state.sfx || !ensure() || !SFX[name]) return; SFX[name](ctx.currentTime + 0.01, o); },
         setMusic(on) { state.music = !!on; persist(); if (ctx) musicBus.gain.setTargetAtTime(on ? 0.55 : 0, ctx.currentTime, 0.1); },
+        setVoice(on) { state.voice = !!on; persist(); if (!on) Voice.stop(); },
         setSfx(on) { state.sfx = !!on; persist(); if (ctx) sfxBus.gain.setTargetAtTime(on ? 0.9 : 0, ctx.currentTime, 0.05); },
-        pause() { if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); },
+        pause() { Voice.stop(); if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); },
         resume() { if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {}); }
     };
 })();
