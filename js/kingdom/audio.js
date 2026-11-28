@@ -14,7 +14,7 @@
         forest: { bpm: 84,  root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 37, bass: true },
         canyon: { bpm: 96,  root: 62, scale: [0, 2, 4, 6, 9],  chords: [[0, 4, 7], [2, 6, 9], [9, 12, 16], [4, 7, 11]], seed: 41, bass: true },
         bubble: { bpm: 88,  root: 63, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [0, 4, 7]], seed: 53, bass: true },
-        neon:   { bpm: 116, root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 97, bass: true, bright: true },
+        neon:   { style: 'synth', bpm: 112, root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 97 },
         candy:  { bpm: 104, root: 65, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [9, 12, 16]], seed: 79, bass: true, bright: true },
         home:   { bpm: 108, root: 67, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [7, 11, 14], [9, 12, 16], [5, 9, 12]], seed: 67, bass: true, bright: true }
     };
@@ -66,6 +66,31 @@
         note(dest, freq * 3.01, t, 0.25, { vol: vol * 0.1, attack: 0.002 });
     };
 
+    /* ── Synth toolkit: noise bursts and drum hits ── */
+    let noiseBuf = null;
+    function noiseBuffer() { if (noiseBuf) return noiseBuf; const n = ctx.sampleRate; noiseBuf = ctx.createBuffer(1, n, ctx.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1; return noiseBuf; }
+    function burst(dest, t, dur, o) {
+        const src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+        src.buffer = noiseBuffer(); f.type = o.type || 'bandpass'; f.frequency.setValueAtTime(o.freq || 1000, t); if (o.sweep) f.frequency.exponentialRampToValueAtTime(o.sweep, t + dur); f.Q.value = o.q || 1;
+        g.gain.setValueAtTime(o.vol || 0.2, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        src.connect(f); f.connect(g); g.connect(dest); src.start(t, Math.random() * 0.5); src.stop(t + dur + 0.02);
+    }
+    const kick = (d, t, v) => { note(d, 150, t, 0.32, { vol: v || 0.34, attack: 0.002, slideTo: 42 }); burst(d, t, 0.03, { type: 'lowpass', freq: 800, vol: (v || 0.34) * 0.4 }); };
+    const clap = (d, t, v) => { burst(d, t, 0.14, { freq: 1700, q: 0.8, vol: v || 0.17 }); burst(d, t + 0.012, 0.12, { freq: 2100, q: 0.8, vol: (v || 0.17) * 0.7 }); };
+    const hat = (d, t, open, v) => burst(d, t, open ? 0.2 : 0.045, { type: 'highpass', freq: 7500, vol: v || 0.05 });
+    /* One 8th-note step of the synthwave backing track */
+    function synthStep(out, t, s, b, ch, th, step, rand) {
+        if (s % 2 === 0) kick(out, t, s === 0 ? 0.4 : 0.34);
+        if (s === 2 || s === 6) clap(out, t);
+        if (s % 2 === 1) hat(out, t, s === 7, s === 7 ? 0.06 : 0.045);
+        const root = th.root + ch[0] - 24;
+        note(out, mtof(root + (s % 4 === 3 ? 12 : 0)), t, step * 0.92, { type: 'sawtooth', vol: 0.11, attack: 0.004, lp: 380 + (b % 2) * 90 });          // pulsing bass
+        const tones = [ch[0], ch[1], ch[2], ch[1] + 12];
+        note(out, mtof(th.root + tones[s % 4] + 12), t, step * 0.78, { type: 'square', vol: 0.04, attack: 0.003, lp: 2200 + (s % 2) * 600 });           // arpeggio
+        if (s === 0) ch.forEach((semi, i) => { note(out, mtof(th.root + semi), t, step * 8, { type: 'sawtooth', vol: 0.018, attack: 0.35, lp: 1100 }); note(out, mtof(th.root + semi) * 1.006, t, step * 8, { type: 'sawtooth', vol: 0.014, attack: 0.35, lp: 1100 }); });   // pad
+        if (s === 5 && b % 2 === 1 && rand() < 0.7) bell(out, mtof(th.root + th.scale[Math.floor(rand() * 5)] + 24), t, 0.06, 0.9);                       // sparkle
+    }
+
     function stopCurrent(fade) {
         if (!cur) return;
         const c = cur; cur = null;
@@ -94,6 +119,7 @@
             if (cur !== c) return;
             while (c.next < ctx.currentTime + 0.3) {
                 const t = c.next, n = c.n, b = Math.floor(n / bar) % 4, s = n % bar, ch = th.chords[b];
+                if (th.style === 'synth') { synthStep(out, t, s, b, ch, th, step, rand); c.next += step; c.n++; continue; }
                 if (s === 0) {   // pad + bass at the start of each bar
                     ch.forEach(semi => note(out, mtof(th.root + semi - 12), t, step * bar * 1.05, { type: 'triangle', vol: 0.055, attack: 0.5, lp: 900 }));
                     if (th.bass) note(out, mtof(th.root + ch[0] - 24), t, step * 4, { vol: 0.12, attack: 0.03 });
@@ -124,9 +150,20 @@
         win(t) { [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.12, 0.16, 1.8)); },
         found(t) { [784, 988, 1175, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.1, 0.15, 1.6)); },
         lose(t) { [523, 440, 349].forEach((f, i) => bell(sfxBus, f, t + i * 0.16, 0.11, 1.2)); },
-        place(t, o) { const f = [392, 494, 587, 698][((o && o.i) || 0) % 4]; note(sfxBus, f, t, 0.18, { vol: 0.11, type: 'triangle' }); note(sfxBus, f * 2, t + 0.04, 0.12, { vol: 0.05, type: 'sine' }); },
-        boom(t, o) { const k = Math.min(8, (o && o.i) || 1), f = 140 + k * 38; note(sfxBus, f, t, 0.34, { vol: 0.17, type: 'sawtooth', slideTo: f * 0.35, lp: 900 }); note(sfxBus, f * 3, t, 0.16, { vol: 0.07, type: 'square', slideTo: f * 1.5, lp: 2400 }); bell(sfxBus, 660 + k * 60, t + 0.05, 0.07, 0.7); },
-        elim(t) { [392, 330, 262, 196].forEach((f, i) => note(sfxBus, f, t + i * 0.12, 0.25, { vol: 0.13, type: 'triangle' })); },
+        shield(t) { [660, 880, 1175, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.06, 0.07, 0.9)); burst(sfxBus, t, 0.35, { type: 'highpass', freq: 3000, sweep: 8000, vol: 0.05 }); },
+        nova(t) { note(sfxBus, 200, t, 0.7, { type: 'sawtooth', vol: 0.12, slideTo: 1400, lp: 2400 }); note(sfxBus, 90, t + 0.55, 0.5, { vol: 0.28, slideTo: 32 }); burst(sfxBus, t + 0.55, 0.5, { type: 'lowpass', freq: 3000, sweep: 150, vol: 0.25 }); },
+        solve(t) { [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568].forEach((f, i) => { bell(sfxBus, f, t + i * 0.08, 0.12, 1.4); note(sfxBus, f, t + i * 0.08, 0.2, { type: 'square', vol: 0.04, lp: 2600 }); }); },
+        fail(t) { [392, 330, 262].forEach((f, i) => note(sfxBus, f, t + i * 0.14, 0.3, { type: 'triangle', vol: 0.1, slideTo: f * 0.9 })); },
+        unlock(t) { [784, 988, 1175, 1568, 1976].forEach((f, i) => bell(sfxBus, f, t + i * 0.07, 0.1, 1.5)); },
+        tick(t) { note(sfxBus, 880, t, 0.05, { vol: 0.05, type: 'square', lp: 2000 }); },
+        victory(t) { [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach((f, i) => { note(sfxBus, f, t + i * 0.1, 0.5, { type: 'sawtooth', vol: 0.07, lp: 2600 }); bell(sfxBus, f * 2, t + i * 0.1 + 0.02, 0.09, 1.6); }); kick(sfxBus, t, 0.3); burst(sfxBus, t + 0.5, 0.9, { type: 'highpass', freq: 5000, sweep: 9000, vol: 0.05 }); [0, 0.25, 0.5, 0.75, 1].forEach(d => bell(sfxBus, 1568 + d * 300, t + 0.6 + d * 0.12, 0.06, 1)); },
+        zap(t) { note(sfxBus, 1500, t, 0.2, { type: 'square', vol: 0.06, slideTo: 240, lp: 3200 }); burst(sfxBus, t, 0.14, { freq: 2600, q: 1.4, vol: 0.06 }); },
+        combo(t, o) { const n = Math.min(8, (o && o.i) || 3), sc = [0, 2, 4, 7, 9, 12, 14, 16]; for (let j = 0; j < n; j++) bell(sfxBus, 523.25 * Math.pow(2, sc[j] / 12), t + j * 0.05, 0.07, 0.8); },
+        turn(t, o) { const f = [392, 494, 587, 698][((o && o.i) || 0) % 4]; burst(sfxBus, t, 0.12, { freq: 500, sweep: 2600, q: 1.2, vol: 0.045 }); note(sfxBus, f, t + 0.02, 0.12, { vol: 0.05, type: 'sine' }); },
+        think(t) { note(sfxBus, 660, t, 0.06, { vol: 0.03, type: 'square', lp: 1800 }); },
+        place(t, o) { const f = [392, 494, 587, 698][((o && o.i) || 0) % 4]; note(sfxBus, f, t, 0.16, { vol: 0.1, type: 'triangle', slideTo: f * 1.5 }); note(sfxBus, f * 2, t + 0.03, 0.1, { vol: 0.05, type: 'sine' }); burst(sfxBus, t, 0.05, { type: 'highpass', freq: 4200, vol: 0.05 }); },
+        boom(t, o) { const k = Math.min(10, (o && o.i) || 1); note(sfxBus, 150 + k * 6, t, 0.42, { vol: 0.2 + Math.min(0.1, k * 0.012), type: 'sine', attack: 0.003, slideTo: 38 }); burst(sfxBus, t, 0.36, { type: 'lowpass', freq: 2400, sweep: 180, vol: 0.2 }); burst(sfxBus, t, 0.1, { type: 'highpass', freq: 3200, vol: 0.09 }); bell(sfxBus, 520 * Math.pow(1.1, k), t + 0.04, 0.06, 0.6); },
+        elim(t) { note(sfxBus, 440, t, 0.75, { type: 'sawtooth', vol: 0.13, slideTo: 55, lp: 1400 }); burst(sfxBus, t, 0.55, { type: 'lowpass', freq: 1600, sweep: 120, vol: 0.2 }); [392, 311, 233].forEach((f, i) => bell(sfxBus, f, t + 0.12 + i * 0.14, 0.09, 1.2)); },
         no(t) { note(sfxBus, 180, t, 0.16, { vol: 0.1, type: 'square', slideTo: 120, lp: 800 }); },
         step(t, o) { const n = [523.25, 587.33, 659.25, 783.99, 880, 1046.5][((o && o.i) || 0) % 6]; note(sfxBus, n, t, 0.14, { vol: 0.07, type: 'sine' }); },
         bump(t) { note(sfxBus, 260, t, 0.22, { vol: 0.16, type: 'triangle', slideTo: 110 }); note(sfxBus, 520, t + 0.02, 0.12, { vol: 0.06, type: 'square', slideTo: 300 }); },

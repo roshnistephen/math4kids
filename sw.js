@@ -1,6 +1,6 @@
 /* LokaKids service worker: works offline, always refreshes in the background.
    Bump VERSION whenever you want every device to re-download the app. */
-const VERSION = 'lokakids-v4';
+const VERSION = 'lokakids-v6';
 const CORE = [
   "index.html",
   "unicorn-trail.html",
@@ -15,6 +15,7 @@ const CORE = [
   "css/kingdom.css",
   "css/theme.css",
   "css/trail.css",
+  "js/chain-puzzles.js",
   "js/chain.js",
   "js/kid.js",
   "js/pwa.js",

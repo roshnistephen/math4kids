@@ -5,117 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#F4F1FF">
 <title>LokaKids — Fun Games for Everyone</title>
-<meta name="description" content="Magical games for kids and families: fly Luna through a 3D rainbow kingdom to find her friend Bella, or draw a rainbow path through the Unicorn Trail maze. Free, no ads, no sign-up.">
+<meta name="description" content="Three free, ad-free games for kids and families: Rainbow Kingdom (3D flying adventure), Unicorn Trail (maze puzzles) and Chain Reaction (neon strategy).">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="LokaKids">
-<meta name="format-detection" content="telephone=no">
 <link rel="icon" href="images/kingdom/luna.png">
 <link rel="apple-touch-icon" href="images/icons/icon-192.png">
 <link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/home.css">
 </head>
-<body class="land">
+<body class="home">
 
-<div class="decor" aria-hidden="true">
-    <div class="blob blob--1"></div>
-    <div class="blob blob--2"></div>
-    <div class="blob blob--3"></div>
-    <i class="cloud" style="--y:8%;--s:1;--d:70s;--dl:-10s"></i>
-    <i class="cloud" style="--y:34%;--s:.7;--d:90s;--dl:-55s"></i>
-    <i class="cloud" style="--y:70%;--s:.9;--d:80s;--dl:-30s"></i>
-</div>
-
-<header class="topbar">
-    <div class="topbar__inner">
-        <a class="brand" href="index.html" aria-label="LokaKids home">
-            <span class="brand__mark"><img src="images/kingdom/luna.png" alt=""></span>
-            <span>
-                <span class="brand__name">Loka<span>Kids</span></span>
-                <span class="brand__tag">Magical unicorn games</span>
-            </span>
-        </a>
-        <span class="topbar__spacer"></span>
-        <div class="topbar__tools">
-            <span class="star-count" data-star-total title="Stars you have collected">⭐ <span class="star-count__num">0</span></span>
-            <button class="btn btn--icon" data-sound-toggle type="button" aria-pressed="true" aria-label="Sound on or off">🔊</button>
-        </div>
-    </div>
+<header class="bar">
+    <a class="brand" href="index.html" aria-label="LokaKids home"><img src="images/kingdom/luna.png" alt=""><span>Loka<b>Kids</b></span></a>
+    <span class="bar__sp"></span>
+    <span class="star-count" data-star-total title="Stars you have collected">⭐ <span class="star-count__num">0</span></span>
+    <button class="icon-btn" data-sound-toggle type="button" aria-pressed="true" aria-label="Sound on or off">🔊</button>
 </header>
 
 <main>
-    <section class="shell land-hero">
-        <div class="land-hero__text">
-            <span class="land-badge">✨ New · 3D flying adventure</span>
-            <h1 class="land-title">Fly with Luna and find <em>Bella</em>.</h1>
-            <p class="land-lede">Soar over fluffy clouds, weave through the magical forest, follow the glowing path and bring Bella home to Rainbow Castle.</p>
-            <div class="land-actions">
-                <a class="btn btn--primary btn--lg" href="rainbow-kingdom.html">Play Rainbow Kingdom ▶</a>
-            </div>
-            <p class="land-note">6 levels · Candy Land · Cute 3D world · Narrated story · Free, no ads</p>
-        </div>
-        <div class="land-stage" aria-hidden="true">
-            <img class="land-stage__unicorn" src="images/kingdom/luna.png" alt="">
-            <img class="land-stage__bella" src="images/kingdom/luna.png" alt="">
-            <img class="land-stage__castle" src="images/kingdom/castle.png" alt="">
-            <img class="land-stage__cloud" src="images/kingdom/cloud.png" alt="">
-            <img class="land-stage__star land-stage__star--a" src="images/kingdom/star.png" alt="">
-            <img class="land-stage__star land-stage__star--b" src="images/kingdom/star.png" alt="">
-        </div>
+    <section class="hero">
+        <h1>Games that make you <em>smile</em>.</h1>
+        <p>Three free games for kids and families. No ads, no sign-up.</p>
     </section>
 
-    <section class="shell land-section">
-        <h2 class="land-h2">How to fly</h2>
-        <div class="land-steps">
-            <article class="land-step">
-                <img src="images/kingdom/luna.png" alt="">
-                <h3>Drag to fly</h3>
-                <p>Touch and hold to fly, then slide to steer Luna. On a computer use the arrow keys.</p>
-            </article>
-            <article class="land-step land-step--good">
-                <img src="images/kingdom/rainbow.png" alt="">
-                <h3>Follow the path</h3>
-                <p>Fly through the glowing rings to follow the magical path to Bella.</p>
-            </article>
-            <article class="land-step land-step--good">
-                <img src="images/kingdom/star.png" alt="">
-                <h3>Collect stars</h3>
-                <p>Stars fill Luna's magic meter. Earn up to 3 ⭐ on every level.</p>
-            </article>
-            <article class="land-step land-step--bad">
-                <img src="images/kingdom/storm.png" alt="">
-                <h3>Dodge the storms</h3>
-                <p>Grumpy clouds and tall trees cost a heart. Tap ✨ Magic for a safe rainbow dash!</p>
-            </article>
-        </div>
-    </section>
-
-    <section class="shell land-section">
-        <h2 class="land-h2">Our games</h2>
-        <div class="land-games">
-            <a class="land-game land-game--rk" href="rainbow-kingdom.html">
-                <span class="land-game__art"><img src="images/kingdom/luna.png" alt=""><img src="images/kingdom/cloud.png" alt=""></span>
-                <span class="land-game__body"><b>Rainbow Kingdom</b><span>Luna's narrated 3D quest. 6 levels from Cloud Meadows and Candy Land to Rainbow Castle.</span><em>Play ▶</em></span>
-            </a>
-            <a class="land-game land-game--trail" href="unicorn-trail.html">
-                <span class="land-game__art"><img src="images/trail/unicorn.png" alt=""><img src="images/trail/mushroom.png" alt=""></span>
-                <span class="land-game__body"><b>Unicorn Trail</b><span>30 magical mazes in 3 worlds. Draw a rainbow path, collect sparkles and dodge cute obstacles.</span><em>Play ▶</em></span>
-            </a>
-            <a class="land-game land-game--cr" href="chain-reaction.html">
-                <span class="land-game__art"><span class="orbs"><i style="--c:#FF3B6B"></i><i style="--c:#2EA8FF"></i><i style="--c:#27F59A"></i><i style="--c:#FFD93B"></i></span></span>
-                <span class="land-game__body"><b>Chain Reaction</b><span>A neon strategy game for 2–4 players. Trigger explosions and capture the whole board!</span><em>Play ▶</em></span>
-            </a>
-        </div>
+    <section class="games" aria-label="Games">
+        <a class="game game--rk" href="rainbow-kingdom.html">
+            <span class="game__art"><img src="images/kingdom/luna.png" alt=""><img class="game__sub" src="images/kingdom/cloud.png" alt=""></span>
+            <span class="game__tag">3D adventure</span>
+            <h2>Rainbow Kingdom</h2>
+            <p>Fly Luna the unicorn through six magical worlds to find her friend Bella.</p>
+            <span class="game__go">Play ▶</span>
+        </a>
+        <a class="game game--trail" href="unicorn-trail.html">
+            <span class="game__art"><img src="images/trail/unicorn.png" alt=""><img class="game__sub" src="images/trail/rainbow.png" alt=""></span>
+            <span class="game__tag">Maze puzzles</span>
+            <h2>Unicorn Trail</h2>
+            <p>Draw a rainbow path through 30 mazes and bring the unicorn home.</p>
+            <span class="game__go">Play ▶</span>
+        </a>
+        <a class="game game--cr" href="chain-reaction.html">
+            <span class="game__art"><span class="orbs"><i style="--c:#FF3B6B"></i><i style="--c:#2EA8FF"></i><i style="--c:#27F59A"></i><i style="--c:#FFD93B"></i></span></span>
+            <span class="game__tag">Neon strategy</span>
+            <h2>Chain Reaction</h2>
+            <p>Trigger explosions, capture the board and solve 30 chain puzzles.</p>
+            <span class="game__go">Play ▶</span>
+        </a>
     </section>
 </main>
 
-<footer class="land-footer">
-    <p>Made with 💖 by LokaKids · <a href="privacy.html">Privacy</a> · Artwork: <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener">Fluent Emoji 3D</a> by Microsoft (MIT) · 3D by <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a></p>
+<footer class="foot">
+    <a href="privacy.html">Privacy</a><span>·</span><span>© <span data-year>2026</span> LokaKids</span>
 </footer>
 
 <script src="js/kid.js"></script>
+<script>document.querySelectorAll('[data-year]').forEach(function (n) { n.textContent = new Date().getFullYear(); });</script>
 <script src="js/pwa.js"></script>
 </body>
 </html>
