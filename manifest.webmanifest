@@ -2,8 +2,8 @@
   "name": "LokaKids \u2014 Rainbow Kingdom & Unicorn Trail",
   "short_name": "LokaKids",
   "description": "Magical unicorn games: fly Luna through Rainbow Kingdom or draw a path in Unicorn Trail.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/index.html?source=pwa",
+  "scope": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#F4F1FF",
@@ -21,5 +21,11 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "id": "/index.html",
+  "categories": [
+    "games",
+    "kids",
+    "education"
   ]
 }

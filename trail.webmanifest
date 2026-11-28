@@ -1,0 +1,59 @@
+{
+  "name": "Unicorn Trail",
+  "short_name": "Unicorn Trail",
+  "id": "/unicorn-trail.html",
+  "description": "Guide the lost unicorn home! Draw a rainbow path through 30 magical mazes in 3 enchanted worlds.",
+  "start_url": "/unicorn-trail.html?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFE9F5",
+  "theme_color": "#FFE9F5",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "games",
+    "kids",
+    "education",
+    "puzzle"
+  ],
+  "icons": [
+    {
+      "src": "images/icons/trail-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/trail-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/trail-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icons/trail-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Continue playing",
+      "short_name": "Play",
+      "url": "/unicorn-trail.html?source=shortcut",
+      "icons": [
+        {
+          "src": "images/icons/trail-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

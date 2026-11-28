@@ -2,61 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#F4F1FF">
-<title>Unicorn Trail — LokaKids</title>
-<meta name="description" content="Draw a rainbow path to guide a lost unicorn through a magical maze and safely home.">
-<link rel="apple-touch-icon" href="images/icons/icon-192.png">
-<link rel="manifest" href="manifest.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFE9F5">
+<title>Unicorn Trail — Rainbow Maze Adventure</title>
+<meta name="description" content="Guide a lost unicorn home! Draw a rainbow path through 30 magical mazes in 3 enchanted worlds. Collect sparkles, dodge cute obstacles and earn stars. Free, no ads.">
+<link rel="manifest" href="trail.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Unicorn Trail">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="format-detection" content="telephone=no">
-<link rel="icon" href="images/trail/unicorn.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/theme.css">
+<link rel="apple-touch-icon" href="images/icons/trail-192.png">
+<link rel="icon" href="images/icons/trail-192.png">
+<link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/trail.css">
 </head>
-<body class="trail-page">
+<body class="ut" data-world="meadow" data-screen="title">
 
-<div class="decor" aria-hidden="true">
-    <div class="blob blob--1"></div>
-    <div class="blob blob--2"></div>
-    <div class="blob blob--3"></div>
+<div class="ut-bg" aria-hidden="true">
+    <i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i>
     <div class="twinkles"></div>
 </div>
 
-<header class="topbar">
-    <div class="topbar__inner">
-        <a class="brand" href="index.html" aria-label="Back to LokaKids home">
-            <span class="brand__mark"><img src="images/trail/unicorn.png" alt=""></span>
-            <span>
-                <span class="brand__name">Unicorn Trail</span>
-                <span class="brand__tag">by LokaKids</span>
-            </span>
-        </a>
-        <span class="topbar__spacer"></span>
-        <div class="topbar__tools">
-            <span class="star-count" data-star-total title="Stars you have collected">
-                ⭐ <span class="star-count__num">0</span>
-            </span>
-            <button class="btn btn--icon" data-sound-toggle type="button" aria-pressed="true">🔊</button>
-            <a class="btn btn--icon" href="index.html" title="Back to menu" aria-label="Back to menu">🏠</a>
-        </div>
-    </div>
-</header>
+<main id="app" aria-live="polite"></main>
 
-<main class="shell game" id="app"></main>
-
-<footer class="site-footer">
-    <p>⭐ Earn stars as you play · <a href="index.html">Back to all games</a></p>
-    <p><small>Artwork: <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener">Fluent Emoji 3D</a> by Microsoft (MIT licence)</small></p>
-</footer>
+<noscript><p style="padding:24px;text-align:center">Unicorn Trail needs JavaScript. Please enable it and reload.</p></noscript>
 
 <script src="js/kid.js"></script>
+<script src="js/kingdom/audio.js"></script>
 <script src="js/trail.js"></script>
+<script src="js/pwa.js"></script>
 </body>
 </html>

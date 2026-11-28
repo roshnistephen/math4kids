@@ -14,6 +14,7 @@
         forest: { bpm: 84,  root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 37, bass: true },
         canyon: { bpm: 96,  root: 62, scale: [0, 2, 4, 6, 9],  chords: [[0, 4, 7], [2, 6, 9], [9, 12, 16], [4, 7, 11]], seed: 41, bass: true },
         bubble: { bpm: 88,  root: 63, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [0, 4, 7]], seed: 53, bass: true },
+        neon:   { bpm: 116, root: 57, scale: [0, 3, 5, 7, 10], chords: [[0, 3, 7], [-4, 0, 3], [3, 7, 10], [-2, 2, 5]], seed: 97, bass: true, bright: true },
         candy:  { bpm: 104, root: 65, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [5, 9, 12], [7, 11, 14], [9, 12, 16]], seed: 79, bass: true, bright: true },
         home:   { bpm: 108, root: 67, scale: [0, 2, 4, 7, 9],  chords: [[0, 4, 7], [7, 11, 14], [9, 12, 16], [5, 9, 12]], seed: 67, bass: true, bright: true }
     };
@@ -123,6 +124,14 @@
         win(t) { [523.25, 659.25, 783.99, 1046.5, 1318.5, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.12, 0.16, 1.8)); },
         found(t) { [784, 988, 1175, 1568].forEach((f, i) => bell(sfxBus, f, t + i * 0.1, 0.15, 1.6)); },
         lose(t) { [523, 440, 349].forEach((f, i) => bell(sfxBus, f, t + i * 0.16, 0.11, 1.2)); },
+        place(t, o) { const f = [392, 494, 587, 698][((o && o.i) || 0) % 4]; note(sfxBus, f, t, 0.18, { vol: 0.11, type: 'triangle' }); note(sfxBus, f * 2, t + 0.04, 0.12, { vol: 0.05, type: 'sine' }); },
+        boom(t, o) { const k = Math.min(8, (o && o.i) || 1), f = 140 + k * 38; note(sfxBus, f, t, 0.34, { vol: 0.17, type: 'sawtooth', slideTo: f * 0.35, lp: 900 }); note(sfxBus, f * 3, t, 0.16, { vol: 0.07, type: 'square', slideTo: f * 1.5, lp: 2400 }); bell(sfxBus, 660 + k * 60, t + 0.05, 0.07, 0.7); },
+        elim(t) { [392, 330, 262, 196].forEach((f, i) => note(sfxBus, f, t + i * 0.12, 0.25, { vol: 0.13, type: 'triangle' })); },
+        no(t) { note(sfxBus, 180, t, 0.16, { vol: 0.1, type: 'square', slideTo: 120, lp: 800 }); },
+        step(t, o) { const n = [523.25, 587.33, 659.25, 783.99, 880, 1046.5][((o && o.i) || 0) % 6]; note(sfxBus, n, t, 0.14, { vol: 0.07, type: 'sine' }); },
+        bump(t) { note(sfxBus, 260, t, 0.22, { vol: 0.16, type: 'triangle', slideTo: 110 }); note(sfxBus, 520, t + 0.02, 0.12, { vol: 0.06, type: 'square', slideTo: 300 }); },
+        undo(t) { note(sfxBus, 740, t, 0.12, { vol: 0.07, type: 'triangle', slideTo: 520 }); },
+        hint(t) { [988, 1319].forEach((f, i) => bell(sfxBus, f, t + i * 0.09, 0.09, 0.9)); },
         whoosh(t) { note(sfxBus, 220, t, 0.4, { vol: 0.05, type: 'sawtooth', slideTo: 900, lp: 1200 }); }
     };
 

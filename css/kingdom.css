@@ -196,3 +196,7 @@ body.cinema #bond { visibility: visible; }
 @keyframes wandShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-7px) rotate(-6deg); } 50% { transform: translateX(7px) rotate(6deg); } 80% { transform: translateX(-3px); } }
 .magic.ready span { font-size: .86rem; }
 body.boost #fx { background: radial-gradient(ellipse at 50% 46%, rgba(255,255,255,0) 40%, rgba(255,200,255,.5) 100%); }
+
+/* Win confetti (shared helper from kid.js) */
+.confetti-bit { position: fixed; top: -14px; z-index: 300; pointer-events: none; animation: confettiFall linear forwards; }
+@keyframes confettiFall { 0% { opacity: 1; transform: translate3d(0, -10px, 0) rotate(0deg); } 100% { opacity: .1; transform: translate3d(var(--drift, 0px), 104vh, 0) rotate(720deg); } }
